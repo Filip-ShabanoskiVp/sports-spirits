@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+</style>
+<body>
+<header th:replace="fragments/header"></header>
+<div class="container" style="margin-top: 88px">
+  <div class="row">
+    <div class="card" style="width: 900px">
+      <div class="card-header bg-dark">
+        <h1 class="text-white">About Us</h1>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="row">
+              <div>Full Name: <h2>Filip Shabanoski</h2></div>
+              <img style="margin-left: 10px" src="/assets/img/me.jpg" height="200" width="200"/>
+            </div>
+            <p>Address: Orde Chopela 16A, Prilep</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2995.480447175962!2d21.552477975875373!3d41.341909798815145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1356ebe3bab710e5%3A0xc6cab05d1acded3c!2sOrde%20Chopela%2016%2C%20Prilep!5e0!3m2!1sen!2smk!4v1689023100126!5m2!1sen!2smk"
+                    width="420" height="450" style="border:0;"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            <p>Contact: +38970324150</p>
+
+            <div th:if="${rating}!='There is no any ratings'">
+              <div th:if="${rating >=0.0 and rating<0.5 }">
+                <p>Page Rating: <span th:text="${rating}"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </p>
+              </div>
+              <div th:if="${rating>=0.5 && rating<1.0}">
+                <p>Page Rating: <span th:text="${rating}"></span>
+                  <span class="fa fa-star-half-o " style="color: orange"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </p>
+              </div>
+              <div th:if="${rating>=1.0 && rating<1.5}">
+                <p>Page Rating: <span th:text="${rating}"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span></p>
+              </div>
+              <div th:if="${rating>=1.5 && rating<2.0}">
+                <p>Page Rating: <span th:text="${rating}"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star-half-o " style="color: orange"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </p>
+              </div>
+              <div th:if="${rating>=2.0 && rating<2.5}">
+                <p>Page Rating: <span th:text="${rating}"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </p>
+              </div>
+              <div th:if="${rating>=2.5 && rating<3.0}">
+                <p>Page Rating: <span th:text="${rating}"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star-half-o " style="color: orange"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </p>
+              </div>
+              <div th:if="${rating>=3.0 && rating<3.5}">
+                <p>Page Rating: <span th:text="${rating}"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </p>
+              </div>
+              <div th:if="${rating>=3.5 && rating<4.0}">
+                <p>Page Rating: <span th:text="${rating}"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star-half-o " style="color: orange"></span>
+                  <span class="fa fa-star"></span>
+                </p>
+              </div>
+              <div th:if="${rating>=4.0 && rating<4.5}">
+                <p>Page Rating: <span th:text="${rating}"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star"></span>
+                </p>
+              </div>
+              <div th:if="${rating>=4.5 && rating<5.0}">
+                <p>Page Rating: <span th:text="${rating}"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star-half-o " style="color: orange"></span>
+                </p>
+              </div>
+              <div th:if="${rating>=5.0}">
+                <p>Page Rating: <span th:text="${rating}"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                  <span class="fa fa-star" style="color: orange"></span>
+                </p>
+              </div>
+            </div>
+            <div th:if="${rating=='There is no any ratings'}">
+              <div><p>Page Rating: <span th:text="${rating}"></span></p></div>
+            </div>
+            <div sec:authorize="hasRole('ROLE_USER')" th:if="${check==false}">
+              <a th:href="@{/aboutUs/rateUs}"
+                 class="btn btn-primary">Rate Us</a>
+            </div>
+          </div>
+          <div class="col-6" >
+            <p>I made this application to help peoples in very easy way to get theirs chosen sport information.
+            The user chose what he want to se and he chose the information and that information satisfies he's
+            needs. Other than that I as and owner offer shopping store for users in very easy way to order their
+            sports product. This web application had a future goals to developed other features that will
+            be new for the users and will attracts other new users.</p>
+          </div>
+</body>
+</html>

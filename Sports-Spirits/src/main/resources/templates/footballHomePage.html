@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+</head>
+<body>
+<header th:replace="fragments/header"></header>
+<div class="row bg-danger" style="margin-top: 95px;">
+    <div class="col-2" style="margin-left: 45px">
+        <h1 class="text-white">Football</h1>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header bg-dark">
+                    <h2 class="text-white">Competitions</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row bg-danger">
+                        <h3 class="text-white">Top Competitions</h3>
+                    </div>
+                    <div class="row bg-dark">
+                        <h4 class="text-white">Club Domestic</h4>
+                    </div>
+                    <div class="row">
+                        <ul>
+                            <li><a href="Football/league/39/League">Premier League</a></li>
+                            <li><a href="Football/league/140/League">La Liga</a></li>
+                            <li><a href="Football/league/135/League">Serie A</a></li>
+                            <li><a href="Football/league/78/League">Bundesliga</a></li>
+                            <li><a href="Football/league/61/League">Ligue 1</a></li>
+                            <li><a href="Football/league/88/League">Eredivisie</a></li>
+                            <li><a href="Football/league/203/League">Super Lig</a></li>
+                            <li><a href="Football/league/94/League">Primeira Liga</a></li>
+                        </ul>
+                    </div>
+                    <div class="row bg-dark">
+                        <h4 class="text-white">Club International</h4>
+                    </div>
+                    <div class="row">
+                        <ul>
+                            <li><a href="Football/league/2/Cup">Uefa Champions League</a></li>
+                            <li><a href="Football/league/3/Cup">Uefa Europa League</a></li>
+                            <li><a href="Football/league/848/Cup">Uefa Europa Conference League</a></li>
+                            <li><a href="Football/league/531/Cup">Uefa Super Cup</a></li>
+                            <li><a href="Football/league/15/Cup">FIFA Club World Cup</a></li>
+                        </ul>
+                    </div>
+                    <div class="row bg-dark">
+                        <h4 class="text-white">National</h4>
+                    </div>
+                    <div class="row">
+                        <ul>
+                            <li><a href="Football/league/1/Cup">Fifa World Cup</a></li>
+                            <li><a href="Football/league/5/League">UEFA Nations League</a></li>
+                            <li><a href="Football/league/4/Cup">Uefa European Championship</a></li>
+                            <li><a href="Football/league/9/Cup">Conmebol Copa America</a></li>
+                        </ul>
+                    </div>
+                    <div class="row bg-dark">
+                        <h4 class="text-white">
+                            <a href="/Football/competitions" style="text-decoration: none;color: white">More Competitions</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="card" style="width: 100%">
+                    <div class="card-header bg-dark">
+                        <h2 class="text-white">Live Fixtures</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped" id="live">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+<!--                            <tr>-->
+<!--                                <td>25/05/23</td>-->
+<!--                                <td>Premier League</td>-->
+<!--                                <td>Manchester United</td>-->
+<!--                                <td>-->
+<!--                                    <a href="/Football/fixture/12356/details" style="text-decoration: none;color: black">20:00</a>-->
+<!--                                </td>-->
+<!--                                <td>Chelsea</td>-->
+<!--                            <tr>-->
+<!--                                <td>28/05/23</td>-->
+<!--                                <td>Premier League</td>-->
+<!--                                <td>Manchester United</td>-->
+<!--                                <td>14:30</td>-->
+<!--                                <td>Fulham</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>03/06/23</td>-->
+<!--                                <td>Fa Cup</td>-->
+<!--                                <td>Manchester City</td>-->
+<!--                                <td>22:00</td>-->
+<!--                                <td>Manchester United</td>-->
+<!--                            </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/assets/scripts/allScores.js">
+</script>
+</html>

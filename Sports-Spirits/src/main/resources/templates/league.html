@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+            integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<header th:replace="fragments/header"></header>
+
+<input type="hidden" id="leagueId" th:value="${id}">
+
+<div style="margin-top: 88px" class="row">
+    <div class="col-1" id="leagueLogo"></div>
+    <div id="leagueName"></div>
+</div>
+<div class="row" style="margin-left: 20px">
+    <form enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label>Season</label>
+            <select id="season" onchange="change()" class="form-select">
+            </select>
+        </div>
+    </form>
+</div>
+<br>
+<br>
+<div class="row bg-dark" style="margin-left: 20px">
+    <h3 class="text-white">Matches</h3>
+</div>
+<div class="row bg-secondary" style="margin-left: 20px">
+    <label class="text-white">Game Week </label>
+    <select id="round" onchange="changeRound()" style="margin-left: 10px" class="form-select">
+    </select>
+</div>
+<div class="row" style="margin-left: 20px">
+    <div class="card" style="width: 100%">
+        <div class="card-body">
+            <table class="table table-striped" id="fTable">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="fBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row bg-dark" style="margin-left: 20px;margin-top: 15px">
+    <h3 class="text-white">Table</h3>
+</div>
+<div class="row" style="margin-left: 20px;margin-top: 20px">
+    <table class="table table-striped sTable" id="table">
+        <thead>
+        <tr>
+            <th>Rank</th>
+            <th></th>
+            <th>Team</th>
+            <th>MP</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>F</th>
+            <th>A</th>
+            <th>GD</th>
+            <th>P</th>
+            <th>Last 5 Matches</th>
+        </tr>
+        </thead>
+        <tbody id="tBody">
+
+        </tbody>
+    </table>
+</div>
+<div class="row bg-dark" style="margin-left: 20px;margin-top: 20px">
+    <h3 class="text-white">Top Scorers</h3>
+</div>
+<div class="row" style="margin-left: 20px;margin-top: 45px">
+
+    <table class="table table-striped" id="tsTable" >
+        <thead>
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>G</th>
+            <th>P</th>
+            <th>A</th>
+        </tr>
+        </thead>
+        <tbody id="sBody">
+        </tbody>
+    </table>
+</div>
+<script src="/assets/scripts/league.js">
+</script>
+</body>
+</html>

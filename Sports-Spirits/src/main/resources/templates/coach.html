@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+</head>
+<body>
+<header th:replace="fragments/header"></header>
+<input type="hidden" id="coachId" name="coachId" th:value="${coachId}" />
+<div class="container" style="margin-top: 185px">
+  <div class="row">
+    <div class="col-11">
+      <div class="card">
+        <div class="card-header bg-danger">
+          <h2 class="text-white" id="coachName"></h2>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <p><b>First Name: </b><span id="fname"></span></p>
+              <p><b>Last Name:</b> <span id="lname"></span></p>
+              <p><b>Nationality:</b> <span id="nationality"></span></p>
+              <p><b>Date of birth:</b> <span id="birth"></span></p>
+              <p><b>Age:</b> <span id="age"></span></p>
+              <p><b>Country of birth:</b> <span id="bCountry"></span></p>
+              <p><b>Place of birth:</b> <span id="bPlace"></span></p>
+            </div>
+            <div class="col-6" id="coachImg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-11">
+      <div class="card">
+        <div class="card-header bg-dark">
+          <h3 class="text-white">Career</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped" id="career">
+            <thead>
+            <tr>
+              <th></th>
+              <th>Team</th>
+              <th>From</th>
+              <th>To</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-11">
+      <div class="card">
+        <div class="card-header bg-dark">
+          <h3 class="text-white">Trophies</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped" id="trophies">
+            <thead>
+            <tr>
+              <th>League</th>
+              <th>Country</th>
+              <th>Season</th>
+              <th>Place</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/assets/scripts/coach.js">
+</script>
+</body>
+</html>

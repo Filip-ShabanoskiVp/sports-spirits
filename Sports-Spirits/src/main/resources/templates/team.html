@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+</head>
+<body>
+<header th:replace="fragments/header"></header>
+<input type="hidden" id="teamId" th:value="${teamId}">
+<div class="container" style="margin-top: 130px">
+    <div class="row">
+        <div class="col-12" id="teamDetails">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container">
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item" id="leagueTable">
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/Football/team/{teamId}/transfers(teamId=${teamId})}">Transfers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/Football/team/{teamId}/results(teamId=${teamId})}">Results</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/Football/team/{teamId}/schedules(teamId=${teamId})}">Schedule</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="card" style="width: 560px;height: 513px">
+                <div class="card-header bg-dark">
+                    <h1 class="text-white">Team</h1>
+                </div>
+                <div class="card-body">
+                    <div id="teamImg"></div>
+                    <p>Name: <span id="teamName"></span></p>
+                    <p>code: <span id="teamCode"></span></p>
+                    <p>Country: <span id="teamCountry"></span></p>
+                    <p>Founded: <span id="teamFounded"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header bg-dark">
+                    <h2 class="text-white">Venue</h2>
+                </div>
+                <div class="card-body">
+                    <div id="vanueImg"></div>
+                    <p>name: <span id="vanueName"></span></p>
+                    <p>City: <span id="vanueCity"></span></p>
+                    <p>Address: <span id="vanueAddress"></span></p>
+                    <p>Surface: <span id="vanueSurface"></span></p>
+                    <p>Capacity: <span id="vanueCapacity"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-danger">
+                        <h2 class="text-white">Squad</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="squad">
+                                    <thead>
+                                    <tr class="bg-dark">
+                                        <th class="text-white"><h4>Goalkeepers</h4></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="gk" >
+                                    </tbody>
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <thead>
+                                    <tr class="bg-dark">
+                                        <th class="text-white"><h4>Defenders</h4></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="d">
+                                    </tbody>
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <thead>
+                                    <tr class="bg-dark">
+                                        <th class="text-white"><h4>Midfielders</h4></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="m">
+                                    </tbody>
+                                    <thead>
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <thead>
+                                    <tr class="bg-dark">
+                                        <th class="text-white"><h4>Forwards</h4></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tbody id="f">
+                                    </tbody>
+                                    <thead>
+                                    <tr class="bg-dark">
+                                        <th class="text-white"><h4>Coach</h4></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tbody id="coach">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<script src="/assets/scripts/team.js">
+</script>
+</body>
+</html>

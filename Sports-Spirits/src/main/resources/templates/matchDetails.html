@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+</head>
+<style>
+    .tab {
+        overflow: hidden;
+        background-color: #f1f1f1;
+        width: 750px;
+        position: relative;
+        right: 20px;
+    }
+
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+
+    .tab button:hover {
+        background-color: #ddd;
+    }
+
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    .tabcontent {
+        display: none;
+        width: 750px;
+        padding: 6px 12px;
+        border-top: none;
+        position: relative;
+        right: 20px;
+    }
+
+
+    .tab2 {
+        overflow: hidden;
+        background-color: #f1f1f1;
+        width: 750px;
+        position: relative;
+        right: 20px;
+    }
+
+    .tab2 button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+
+    .tab2 button:hover {
+        background-color: #ddd;
+    }
+
+    .tab2 button.active2 {
+        background-color: #ccc;
+    }
+
+    .tabcontent2 {
+        display: none;
+        width: 750px;
+        padding: 6px 12px;
+        border-top: none;
+        position: relative;
+        right: 20px;
+    }
+
+</style>
+<body>
+<header th:replace="fragments/header"></header>
+    <div class="container" style="position: relative;left: 150px;margin-top: 88px">
+        <div class="row">
+            <div class="card" style="width: 850px">
+                <div class="card-header">
+                    <h2>Details</h2>
+                </div>
+                <div class="card-body">
+
+                    <div class="tab" style="width: 850px">
+                        <button class="tablinks active" onclick="openTab(event, 'Lineup')">Lineup</button>
+                        <button class="tablinks" onclick="openTab(event, 'MatchOfficials')">Match Officials</button>
+                        <button class="tablinks" onclick="openTab(event, 'Statistics')">Statistics</button>
+                        <button class="tablinks" onclick="openTab(event, 'h2h')">H2H</button>
+                        <button class="tablinks" onclick="openTab(event, 'playerStatistics')">Player Statistics</button>
+                    </div>
+
+                    <p style="margin-left: 100px;margin-top: 15px"><a href="/Football/team/85" style="text-decoration: none;color: black"><img src="https://media.api-sports.io/football/teams/85.png"
+                    height="50" width="50"><a href="/Football/team/85" style="text-decoration: none; color: black"></a>
+                        Paris Saint Germain 1 - 1</a>
+                        <a href="/Football/team/85"><img src="https://media.api-sports.io/football/teams/84.png"
+                         height="50" width="50">
+                        </a><a href="/Football/team/85" style="text-decoration: none;color: black">Nice</a></p>
+                    <p style="margin-left: 250px">(HT 0 - 0)</p>
+                        <div class="row">
+                            <div class="col-3">04/05/2019</div>
+                            <div class="col-3"><a href="/Football/league/61" style="text-decoration: none;color: black">Ligue 1</a></div>
+                            <div class="col-3">Regular Season - 35</div>
+                            <div class="col-3">KO 15:00</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">Venue Parc des Princes (Paris)</div>
+                        </div>
+                    <hr/>
+                    <div id="Lineup" style="display: block" class="tabcontent">
+                        <div class="row" style="width: 849px;position: relative;left: 3px">
+                            <div class="col-12 bg-dark">
+                                <h5 class="text-white">Lineup</h5>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-6">
+                                <p>Formation: 4-2-3-1</p>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>A. Areola (G)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>13</td>
+                                        <td>Dani Alves</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Marquinhos</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14</td>
+                                        <td>Juan Bernat</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>P. Kimpembe</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>Á. Di María</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>M. Verratti</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>L. Paredes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>23</td>
+                                        <td>J. Draxler</td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>E. Cavani</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>
+                                            <a href="/Football/player/77" style="text-decoration: none;color: black">Neymar</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Coach:</b></td>
+                                        <td><a href="/Football/coach/1993" style="text-decoration: none;color: black">T. Tuchel</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <p>Formation: 4-3-3</p>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>40</td>
+                                        <td>W. Benítez (G)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>31</td>
+                                        <td>Dante</td>
+                                    </tr>
+                                    <tr>
+                                        <td>29</td>
+                                        <td>C. Hérelle</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15</td>
+                                        <td>P. Burner</td>
+                                    </tr>
+                                    <tr>
+                                        <td>23</td>
+                                        <td>M. Sarr</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>Y. Atal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>A. Tameze</td>
+                                    </tr>
+                                    <tr>
+                                        <td>21</td>
+                                        <td>Danilo Barbosa</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>A. Saint-Maximin</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>P. Lees Melou</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14</td>
+                                        <td>I. Ganago</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Coach: </b></td>
+                                        <td>P. Vieira</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 849px;position: relative;left: 2px">
+                            <div class="col-12 bg-dark">
+                                <h5 class="text-white">Substitutes</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>27</td>
+                                        <td>M. Diaby</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>L. Kurzawa</td>
+                                    </tr>
+                                    <tr>
+                                        <td>36</td>
+                                        <td>L. Mbe Soh</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>G. Buffon</td>
+                                    </tr>
+                                    <tr>
+                                        <td>33</td>
+                                        <td>A. Zagre</td>
+                                    </tr>
+                                    <tr>
+                                        <td>31</td>
+                                        <td>C. Dagba</td>
+                                    </tr>
+                                    <tr>
+                                        <td>24</td>
+                                        <td>C. Nkunku</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>27</td>
+                                        <td>J. Makengo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>M. Le Bihan</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>B. Srarfi</td>
+                                    </tr>
+                                    <tr>
+                                        <td>18</td>
+                                        <td>I. Sacko</td>
+                                    </tr>
+                                    <tr>
+                                        <td>33</td>
+                                        <td>A. Jaziri</td>
+                                    </tr>
+                                    <tr>
+                                        <td>31</td>
+                                        <td>Y. Clementia (G)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>28</td>
+                                        <td>O. Boscagli</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MatchOfficials" style="display: none" class="tabcontent">
+                        <div class="row" style="width: 850px;position: relative;left: 2px">
+                            <div class="col-12 bg-secondary">
+                                <h5 class="text-white">Match Officials</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="width: 850px">
+                                <table class="table table-striped" style="width: 825px">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Referee:</td>
+                                        <td>Frank Schneider</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Statistics" style="display: none" class="tabcontent">
+                        <div class="row" style="width: 849px;position: relative;left: 3px">
+                            <div class="col-12 bg-danger">
+                                <h5 class="text-white">Statistics</h5>
+                            </div>
+                        </div>
+                        <div style="margin-left: 60px;margin-top: 10px">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>5</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Shots on Goal</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>2</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>7</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Shots off Goal</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>4</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>17</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Total Shots</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>8</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>5</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Blocked Shots</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>2</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>12</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Shots insidebox</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>5</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>5</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Shots outsidebox</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>3</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>15</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Fouls</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>14</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>9</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Corner Kicks</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>1</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>2</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Offsides</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>2</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>61%</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Ball Possession</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>39%</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>2</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Yellow Cards</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>3</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>0</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Red Cards</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>0</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>1</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Goalkeeper Saves</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>4</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>633</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Total passes</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>5</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>633</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Total passes</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>414</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>575</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Passes accurate</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>365</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>91%</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Passes %</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>88%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="h2h" style="display: none" class="tabcontent">
+                        <div class="row" style="width: 849px;position: relative;left: 3px">
+                            <div class="col-12 bg-dark">
+                                <h5 class="text-white">H2H</h5>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 850px">
+                            <table class="table table-striped" id="table" style="width: 850px">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>2023-04-08</td>
+                                    <td>Ligue 1</td>
+                                    <td><img src="https://media-3.api-sports.io/football/teams/84.png"
+                                             height="25" width="25"/></td>
+                                    <td>Nice</td>
+                                    <td><a href="/Football/fixture/12356/details"
+                                           style="text-decoration: none;color: black">0 - 2</a></td>
+                                    <td><img src="https://media-3.api-sports.io/football/teams/85.png"
+                                             height="25" width="25" /></td>
+                                    <td>Paris Saint Germain</td>
+                                   </tr>
+                                <tr>
+                                    <td>2022-10-01</td>
+                                    <td>Ligue 1</td>
+                                    <td><img src="https://media-3.api-sports.io/football/teams/85.png"
+                                             height="25" width="25" /></td>
+                                    <td>Paris Saint Germain</td>
+                                    <td><a href="/Football/fixture/12356/details"
+                                           style="text-decoration: none;color: black">2 - 1</a></td>
+                                    <td><img src="https://media-3.api-sports.io/football/teams/84.png"
+                                             height="25" width="25"/></td>
+                                    <td>Nice</td>
+                                </tr>
+                                <tr>
+                                    <td>2022-03-05</td>
+                                    <td>Ligue 1</td>
+                                    <td><img src="https://media-3.api-sports.io/football/teams/84.png"
+                                             height="25" width="25"/></td>
+                                    <td>Nice</td>
+                                    <td><a href="/Football/fixture/12356/details"
+                                           style="text-decoration: none;color: black">1 - 0</a></td>
+                                    <td><img src="https://media-3.api-sports.io/football/teams/85.png"
+                                             height="25" width="25" /></td>
+                                    <td>Paris Saint Germain</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="playerStatistics" style="display: none" class="tabcontent">
+                        <div class="row" style="width: 849px;position: relative;left: 3px">
+                            <div class="col-12 bg-dark">
+                                <h5 class="text-white">Player Statistics</h5>
+                            </div>
+                        </div>
+                        <div class="row" style="position: relative;left: 8px">
+                            <div class="col-12">
+                                <div class="tab2" style="width: 850px">
+                                    <button class="tablinks2 active2" onclick="openTab2(event, 'Home')">Home</button>
+                                    <button class="tablinks2" onclick="openTab2(event, 'Away')">Away</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Home" style="display: block" class="tabcontent2">
+                            <div class="row" style="margin-top: 16px">
+                                <div class="col-12" style="width: 850px">
+                                    <table class="table table-striped" style="width: 845px">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Minutes</th>
+                                            <th>Saves</th>
+                                            <th>Conceded</th>
+                                            <th>Goals</th>
+                                            <th>Total Passes</th>
+                                            <th>Yellow Cards</th>
+                                            <th>Yellow Card</th>
+                                            <th>Rating</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Alphonse Aréola</td>
+                                            <td>Gk</td>
+                                            <td>90</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>0</td>
+                                            <td>12</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>6.4</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Away" style="display: none" class="tabcontent2">
+                            <div class="row" style="margin-top: 16px">
+                                <div class="col-12" style="width: 850px">
+                                    <table class="table table-striped" style="width: 845px">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Minutes</th>
+                                            <th>Saves</th>
+                                            <th>Conceded</th>
+                                            <th>Goals</th>
+                                            <th>Total Passes</th>
+                                            <th>Yellow Cards</th>
+                                            <th>Yellow Card</th>
+                                            <th>Rating</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Walter Benítez</td>
+                                            <td>Gk</td>
+                                            <td>90</td>
+                                            <td>4</td>
+                                            <td>1</td>
+                                            <td>0</td>
+                                            <td>16</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>7.8</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    function openTab2(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent2");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks2");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active2", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active2";
+    }
+</script>
+</body>
+</html>

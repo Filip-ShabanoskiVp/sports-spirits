@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+</head>
+<body>
+<header th:replace="fragments/header"></header>
+<div class="content" style="margin-top: 100px;margin-left: 30px;width: 1285px;">
+    <div class="row">
+        <div class="col-12 card" style="height: 300px">
+            <div th:if="${param.message}">
+                <h2 class="text-center text-primary" th:text="${param.message}"></h2>
+            </div>
+
+            <div th:if="${param.error}">
+                <h2 class="text-center text-danger" th:text="${param.error}"></h2>
+            </div>
+            <h2>Products</h2>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>image</th>
+                        <th>name</th>
+                        <th>localDateTime</th>
+                        <th>description</th>
+                        <th>quantity</th>
+                        <th>cost</th>
+                        <th>manufacturer</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product: ${products}" th:if="${product.getQuantity()>0}">
+                        <td><img th:src="${product.getProductImage()}"
+                                 width="100px"height="100px"></td>
+                        <td th:text="${product.getName()}"></td>
+                        <td th:text="${product.getLocalDateTime()}"></td>
+                        <td th:text="${product.getDescription()}"></td>
+                        <td th:text="${product.getQuantity()}"></td>
+                        <td th:text="${product.getCost()}"></td>
+                        <td th:text="${product.getManufacturer().getName()}">{{product.manufacturer.name}}</td>
+                        <td>
+                            <form th:action="@{/shopping-carts/{id}/add-product(id=${product.getId()})}" th:method="post">
+                                <button type="submit" class="btn btn-primary"
+                                        sec:authorize="hasRole('ROLE_USER')">Add to Cart</button>
+                            </form>
+                        </td>
+                        <td>
+                            <a th:href="@{/products/{id}/edit(id=${product.getId()})}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-secondary">Edit</a>
+                        </td>
+                        <td>
+                            <form th:action="@{/products/{id}/delete(id=${product.getId()})}" th:method="post" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:action="@{/shopping-carts/{id}/remove-product(id=${product.getId()})}" th:method="post">
+                                <button type="submit" class="btn btn-danger "
+                                        sec:authorize="hasRole('ROLE_USER')">Remove from cart</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col mb-2">
+            <div class="row">
+                <a class="btn btn-secondary btn-block" href="/products/add-new"
+                   sec:authorize="hasRole('ROLE_ADMIN')">Add new Product</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

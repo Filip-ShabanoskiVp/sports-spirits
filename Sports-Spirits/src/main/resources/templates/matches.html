@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+</head>
+<style>
+</style>
+<body>
+<header th:replace="fragments/header"></header>
+<input type="hidden"id="teamId" name="teamId" th:value="${teamId}">
+<input type="hidden" id="matchPlay" name="matchPlay" th:value="${matchPlay}" />
+<div class="container" style="margin-top: 88px">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-dark">
+          <div class="row">
+            <div>
+              <h1 class="text-white" th:text="${matchPlay}"></h1>
+            </div>
+            <div class="col-7" style="margin-left: 280px" th:if='${matchPlay == "results"}'>
+              <span class="text-white" style="margin-left: 450px">Season: </span>
+              <select id="season" onchange="changeSeason()" class="form-select">
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" th:if='${matchPlay == "schedules"}'>
+          <table class="table table-striped" id="schedulesTable">
+            <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-body" th:if='${matchPlay == "results"}'>
+          <table class="table table-striped" id="resultsTable">
+            <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody id="resBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/assets/scripts/matches.js">
+</script>
+</body>
+</html>
