@@ -1,9 +1,11 @@
+
+
 function showLiveScores(){
     const url = 'https://api-football-beta.p.rapidapi.com/fixtures?live=all';
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -51,7 +53,7 @@ function showLiveScores(){
                 newCell6.appendChild(newText6);
 
                 var newCell7 = newRow.insertCell();
-                newCell7.innerHTML = "<span style='color: green'>" + item.fixture.status.elapsed + "</span>"
+                newCell7.innerHTML = "<span style='color: green'>" + item.fixture.status.elapsed + "'" + "</span>"
 
             });
         }).catch(error=>console.log(error));

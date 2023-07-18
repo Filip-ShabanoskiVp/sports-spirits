@@ -1,11 +1,12 @@
 var teamId = document.getElementById('teamId').value;
 
+
 function showTeam(){
     const url = 'https://api-football-beta.p.rapidapi.com/teams?id='+teamId;
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -32,7 +33,7 @@ function showTeamTransfers(){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };

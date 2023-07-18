@@ -1,3 +1,16 @@
+//Facebook
+// 'X-RapidAPI-Key': '6fbe9e29c5msh8b63eb96d8fc212p1fd9e6jsna0c68e516fe7'
+//Filip Shabanoski Vp
+// 'X-RapidAPI-Key': '6f2f0430f2msh82ec4424641b7afp175579jsn096efcabd13d'
+// kingTest
+// 'X-RapidAPI-Key': 'cf43a19774mshd2a1b5fe9d0e2d8p14f474jsna633fbb9cb9e'
+// - King Petreski
+// 'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2'
+//-Filip Shabanoski
+// 'X-RapidAPI-Key': '702c5bbc4dmsha478d0e8917ce08p1c7f91jsn0b95b932a884'
+// Dimovskiot
+//   'X-RapidAPI-Key':'45bc330b26msh558c0765abcd1bdp1b4900jsn8021ac1feca8'
+
 
 var leagueId = document.getElementById("leagueId").value;
 
@@ -8,7 +21,7 @@ function showSeasonFixtures(league,season,round){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2'
+            'X-RapidAPI-Key': apiKey
             ,'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -69,18 +82,7 @@ function showSeasons(){
         method: 'GET',
         headers: {
 
-            //Facebook
-            // 'X-RapidAPI-Key': '6fbe9e29c5msh8b63eb96d8fc212p1fd9e6jsna0c68e516fe7'
-            //Filip Shabanoski Vp
-            // 'X-RapidAPI-Key': '6f2f0430f2msh82ec4424641b7afp175579jsn096efcabd13d'
-            // kingTest
-            // 'X-RapidAPI-Key': 'cf43a19774mshd2a1b5fe9d0e2d8p14f474jsna633fbb9cb9e'
-            // - King Petreski
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2'
-            //-Filip Shabanoski
-            // 'X-RapidAPI-Key': '702c5bbc4dmsha478d0e8917ce08p1c7f91jsn0b95b932a884'
-            // Dimovskiot
-            //   'X-RapidAPI-Key':'45bc330b26msh558c0765abcd1bdp1b4900jsn8021ac1feca8'
+            'X-RapidAPI-Key': apiKey
             ,'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -134,7 +136,7 @@ function showRounds(mySeason){
         method: 'GET',
         headers: {
 
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2'
+            'X-RapidAPI-Key': apiKey
             ,'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -190,7 +192,7 @@ function showTeams(season,leagueId){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2'
+            'X-RapidAPI-Key': apiKey
             ,'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -278,7 +280,7 @@ function LeagueTopScorers(league,season){
         method: 'GET',
         headers: {
 
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2'
+            'X-RapidAPI-Key': apiKey
             ,'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };

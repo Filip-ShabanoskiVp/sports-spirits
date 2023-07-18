@@ -1,5 +1,7 @@
 var teamId = document.getElementById('teamId').value;
+
 var matchPlay = document.getElementById('matchPlay').value;
+
 
 function Schedules(){
     if(matchPlay=="schedules"){
@@ -7,7 +9,7 @@ function Schedules(){
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+                'X-RapidAPI-Key': apiKey,
                 'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
             }
         };
@@ -77,7 +79,7 @@ function results(season){
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+                'X-RapidAPI-Key': apiKey,
                 'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
             }
         };

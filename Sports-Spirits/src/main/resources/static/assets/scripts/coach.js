@@ -1,12 +1,13 @@
 var coachId = document.getElementById("coachId").value;
 
+
 function showCoachesInfo(){
 
     const url = 'https://api-football-beta.p.rapidapi.com/coachs?id='+coachId;
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -39,7 +40,7 @@ function showCoachCareer(){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -84,7 +85,7 @@ function showTrophies(){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };

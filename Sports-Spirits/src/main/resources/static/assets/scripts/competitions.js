@@ -1,9 +1,10 @@
+
 function getLeagues(){
     const url = 'https://api-football-beta.p.rapidapi.com/leagues';
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };

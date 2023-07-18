@@ -1,5 +1,5 @@
 var playerId = document.getElementById("playerId").value;
-console.log(playerId);
+
 
 function showPlayerPersonalInfo(){
 
@@ -7,7 +7,7 @@ function showPlayerPersonalInfo(){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -41,7 +41,7 @@ function showPlayerTransfers(){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -91,7 +91,7 @@ function showTrophies(){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -130,7 +130,7 @@ function showPlayerStatistics(){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };

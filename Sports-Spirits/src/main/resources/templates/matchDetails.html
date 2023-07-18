@@ -86,6 +86,7 @@
 <body>
 <header th:replace="fragments/header"></header>
     <div class="container" style="position: relative;left: 150px;margin-top: 88px">
+        <input type="hidden" id="fixtureId" name="fixtureId" th:value="${fixtureId}">
         <div class="row">
             <div class="card" style="width: 850px">
                 <div class="card-header">
@@ -100,7 +101,7 @@
                         <button class="tablinks" onclick="openTab(event, 'h2h')">H2H</button>
                         <button class="tablinks" onclick="openTab(event, 'playerStatistics')">Player Statistics</button>
                     </div>
-
+                    <div style="margin-left: 305px;position: relative;top: 15px">FT</div>
                     <p style="margin-left: 100px;margin-top: 15px"><a href="/Football/team/85" style="text-decoration: none;color: black"><img src="https://media.api-sports.io/football/teams/85.png"
                     height="50" width="50"><a href="/Football/team/85" style="text-decoration: none; color: black"></a>
                         Paris Saint Germain 1 - 1</a>
@@ -711,6 +712,9 @@
         </div>
     </div>
 <script>
+    var fixtureId = document.getElementById('fixtureId').value;
+
+
     function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");

@@ -5,7 +5,7 @@ function showTeam(){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -31,17 +31,27 @@ function showTeam(){
                 document.getElementById("vanueAddress").innerHTML = item.venue.address;
                 document.getElementById("vanueSurface").innerHTML = item.venue.surface;
                 document.getElementById("vanueCapacity").innerHTML = item.venue.capacity;
+
+                if(item.team.name!=item.team.country){
+                    var a = document.createElement('a');
+                    var textNode = document.createTextNode("Transfers");
+                    a.setAttribute("href", "/Football/team/" + teamId + "/transfers")
+                    a.className = "nav-link";
+                    a.appendChild(textNode);
+                    document.getElementById('transfersLink').appendChild(a);
+                }
             })
         })
 }
 // showTeam()
+
 function showTeamSquad() {
 
     const url = 'https://api-football-beta.p.rapidapi.com/players?season=2023&team=' + teamId;
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
@@ -121,14 +131,14 @@ function showTeamSquad() {
                 }
             })
         })
-        var navTeamDetails = document.createElement('a');
-        var textNode = document.createTextNode("Table");
-        navTeamDetails.setAttribute("href","/Football/league/"+ leagueIdArray[0].id +"/League")
-        navTeamDetails.className = "nav-link";
-        navTeamDetails.appendChild(textNode);
-        document.getElementById('leagueTable').appendChild(navTeamDetails);
-
-
+        if(data.response.length>0) {
+            var navTeamDetails = document.createElement('a');
+            var textNode = document.createTextNode("Table");
+            navTeamDetails.setAttribute("href", "/Football/league/" + leagueIdArray[0].id + "/League")
+            navTeamDetails.className = "nav-link";
+            navTeamDetails.appendChild(textNode);
+            document.getElementById('leagueTable').appendChild(navTeamDetails);
+        }
     })
 }
 // showTeamSquad();
@@ -138,7 +148,7 @@ function showCoach(){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
