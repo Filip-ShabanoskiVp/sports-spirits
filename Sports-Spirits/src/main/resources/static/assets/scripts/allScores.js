@@ -52,8 +52,12 @@ function showLiveScores(){
                 var newText6 = document.createTextNode(item.teams.away.name);
                 newCell6.appendChild(newText6);
 
-                var newCell7 = newRow.insertCell();
-                newCell7.innerHTML = "<span style='color: green'>" + item.fixture.status.elapsed + "'" + "</span>"
+                if(item.fixture.status.short=="1H" || item.fixture.status.short=="2H"
+                    || item.fixture.status.short=="H" || item.fixture.status.short=="ET"
+                    || item.fixture.status.short=="P"){
+                    var newCell7 = newRow.insertCell();
+                    newCell7.innerHTML = "<span style='color: green'>" + item.fixture.status.elapsed + '"' + '</span>'
+                }
 
             });
         }).catch(error=>console.log(error));
