@@ -11,8 +11,20 @@
 // Dimovskiot
 //   'X-RapidAPI-Key':'45bc330b26msh558c0765abcd1bdp1b4900jsn8021ac1feca8'
 
+//filipcaro1998 gmail
+// 'X-RapidAPI-Key':'d92b2ec520msh51a2e20cb914247p16fe7cjsn3871113d6a3e'
+
+// filipunited1998@gmail.com
+// 'X-RapidAPI-Key':'f070bb1973mshc4cf6cc418baddap1eedf8jsnd87ea93de8de'
+
+// filipshaban@gmail.com
+// 'bfa1aa5261mshab2d224480b03aep1dcc39jsn9817688d6ba2'
+
+// filipshaban2@gmail.com
+//'5b1e78ac7amshb1ee3770a6fd586p14341djsn1a687b391d62'
 
 var leagueId = document.getElementById("leagueId").value;
+var type = document.getElementById('type').value;
 
 function showSeasonFixtures(league,season,round){
     const url = 'https://api-football-beta.p.rapidapi.com/fixtures?season='
@@ -32,44 +44,62 @@ function showSeasonFixtures(league,season,round){
         })
         .then(data=> {
             var fbodyRef = document.getElementById('fTable').getElementsByTagName('tbody')[0];
-            data.response.forEach(item => {
-                console.log(item);
-                var newRow = fbodyRef.insertRow();
+            if(data.response.length>0){
+                console.log("Noooo");
+                document.getElementById('ResultShow').style.display = "block";
+                data.response.forEach(item => {
+                    console.log(item);
+                    var newRow = fbodyRef.insertRow();
 
-                var newCell1 = newRow.insertCell();
-                var newText1 = document.createTextNode(item.fixture.status.long);
-                newCell1.appendChild(newText1);
+                    var newCell1 = newRow.insertCell();
+                    var newText1 = document.createTextNode(item.fixture.status.long);
+                    newCell1.appendChild(newText1);
 
-                var newCell2 = newRow.insertCell();
-                var newText2 = document.createTextNode(item.fixture.date.substring(0,10));
-                newCell2.appendChild(newText2);
+                    var newCell2 = newRow.insertCell();
+                    var newText2 = document.createTextNode(item.fixture.date.substring(0,10));
+                    newCell2.appendChild(newText2);
 
-                var newCell3 = newRow.insertCell();
-                var newText3 = document.createTextNode(item.league.name);
-                newCell3.appendChild(newText3);
+                    var newCell3 = newRow.insertCell();
+                    var newText3 = document.createTextNode(item.league.name);
+                    newCell3.appendChild(newText3);
 
-                var newCell4 = newRow.insertCell();
-                var newText4 = document.createTextNode(item.teams.home.name);
-                newCell4.appendChild(newText4);
+                    var newCell4 = newRow.insertCell();
+                    var newText4 = document.createTextNode(item.teams.home.name);
+                    newCell4.appendChild(newText4);
 
-                var newCell5 = newRow.insertCell();
+                    var newCell5 = newRow.insertCell();
 
-                if(item.fixture.status.short!="FT") {
-                    newCell5.innerHTML = '<a href="' + "/Football/fixture/"
-                        + item.fixture.id + '/details" style="text-decoration: none;color: black">'
-                        + item.fixture.date.substring(11, 16) + "</a>";
-                }else {
-                    newCell5.innerHTML = '<a href="' + "/Football/fixture/"
-                        + item.fixture.id + '/details" style="text-decoration: none;color: black">'
-                        + item.goals.home + " - " + item.goals.away + "</a>";
-                }
+                    if(item.fixture.status.short=="NS") {
+                        newCell5.innerHTML = '<a href="' + "/Football/fixture/"
+                            + item.fixture.id + '/details" style="text-decoration: none;color: black">'
+                            + item.fixture.date.substring(11, 16) + "</a>";
+                    }else if(item.fixture.status.short=="FT"){
+                        newCell5.innerHTML = '<a href="' + "/Football/fixture/"
+                            + item.fixture.id + '/details" style="text-decoration: none;color: black">'
+                            + item.goals.home + " - " + item.goals.away + "</a>";
 
-                var newCell6 = newRow.insertCell();
-                var newText6 = document.createTextNode(item.teams.away.name);
-                newCell6.appendChild(newText6);
+                    }else if(item.fixture.status.short=="1H" || item.fixture.status.short=="2H"
+                        || item.fixture.status.short=="HT" || item.fixture.status.short=="ET"
+                        || item.fixture.status.short=="P"){
+                        newCell5.innerHTML = '<a href="' + "/Football/fixture/"
+                            + item.fixture.id + '/details" style="text-decoration: none;color: red">'
+                            + item.goals.home + " - " + item.goals.away + "</a>";
+                    }
 
+                    var newCell6 = newRow.insertCell();
+                    var newText6 = document.createTextNode(item.teams.away.name);
+                    newCell6.appendChild(newText6);
 
-            });
+                    if(item.fixture.status.short=="1H" || item.fixture.status.short=="2H"
+                        || item.fixture.status.short=="HT" || item.fixture.status.short=="ET"
+                        || item.fixture.status.short=="P"){
+                        var newCell7 = newRow.insertCell();
+                        newCell7.innerHTML = "<span style='color: green'>" + item.fixture.status.elapsed + '"' + '</span>'
+                    }
+                });
+            }else {
+                document.getElementById('ResultShow').style.display = "none"
+            }
         }).catch(error=>console.log(error));
 }
 
@@ -92,45 +122,46 @@ function showSeasons(){
             return res.json();
         })
         .then(data=> {
+
+            var img = document.createElement('img');
+            img.width = "100";
+            img.height = "100";
+            img.src = data.response[0].league.logo;
+            document.getElementById("leagueLogo").appendChild(img);
+            document.getElementById("leagueName").innerHTML = "<h1>"+ data.response[0].league.name +"</h1>";
+
             data.response.forEach(item => {
                 item.seasons.reverse().forEach(season => {
 
                     var x = document.getElementById("season");
                     var option = document.createElement("option");
-                    // console.log(season.year)
-                    option.text = season.start.substring(0,4) + "/"+ season.end.substring(0,4);
+                    // option.text = season.start.substring(0,4) + "/"+ season.end.substring(0,4);
+                     option.text = season.start.substring(0,4);
                     option.value = season.year;
-                    // console.log(season.year);
-                    // console.log(season.start.substring(0,4) + "/"+ season.end.substring(0,4));
                     myArray[i] = season.year;
                     i++;
                     x.add(option);
                 })
             })
             if(myArray.length>1){
-                // console.log("Ok")
-                // console.log(myArray[1]);
 
+                // showRounds(myArray[1],myArray[0]);
 
-                // showRounds(myArray[1]);
-                // console.log($("#round").val($("#round option:first").val()))
-                //  showSeasonFixtures(leagueId,myArray[0],"Regular%20Season%20-%201")
             }else {
-                // console.log("No");
-                // console.log(myArray[0]);
 
-                // showRounds(myArray[0]);
-                // console.log($("#round").val($("#round option:first").val()))
-                //  showSeasonFixtures(leagueId,myArray[0],"Regular%20Season%20-%201")
+                // showRounds(myArray[0],myArray[0]);
             }
+            // showTeams(myArray[0],leagueId);
             // LeagueTopScorers(leagueId,myArray[0]);
-            showTeams(myArray[0],leagueId);
         })
 }
 
-function showRounds(mySeason){
+function showRounds(roundSeason,currentSeason){
 
-    const url = 'https://api-football-beta.p.rapidapi.com/fixtures/rounds?season='+mySeason+'&league='+leagueId;
+    const url = 'https://api-football-beta.p.rapidapi.com/fixtures/rounds?season='+roundSeason+'&league='+leagueId;
+
+    var myArray = [];
+    var i=0;
 
     const options = {
         method: 'GET',
@@ -151,10 +182,13 @@ function showRounds(mySeason){
                 var option = document.createElement("option");
                 option.text = item;
                 option.value = item.replace(/\s/g,"%20");
-                // console.log(item)
-                // console.log(item.replace(/\s/g,"%20"));
+
+                myArray[i] = item.replace(/\s/g,"%20");
+                i++;
+
                 x.add(option);
             })
+            // showSeasonFixtures(leagueId,currentSeason,myArray[0])
         })
 }
 showSeasons();
@@ -168,10 +202,17 @@ function change(){
         tbody.removeChild(tbody.lastChild);
     }
 
-    showTeams(season,leagueId);
-    // changeRound();
-    // showSeasonFixtures(leagueId,season,round);
-    //
+    let showGroupCell = document.getElementById('showGroupCell');
+    while (showGroupCell.hasChildNodes()){
+        showGroupCell.removeChild(showGroupCell.lastChild);
+    }
+
+    // showTeams(season,leagueId);
+
+        // changeRound();
+        //
+        // showSeasonFixtures(leagueId, season, round);
+
     // LeagueTopScorers(leagueId,season);
 }
 
@@ -183,7 +224,7 @@ function changeRound(){
     while (tbody.hasChildNodes()){
         tbody.removeChild(tbody.lastChild);
     }
-    showSeasonFixtures(leagueId,season,round);
+    // showSeasonFixtures(leagueId,season,round);
 }
 
 function showTeams(season,leagueId){
@@ -202,95 +243,199 @@ function showTeams(season,leagueId){
             return res.json();
         })
         .then(data=>{
-            data.response.forEach(item=>{
-                document.getElementById("leagueLogo").innerHTML = `<img src="${item.league.logo}"width="100" height="100"/>`;
-                document.getElementById("leagueName").innerHTML = "<h1>"+item.league.name+"</h1>";
-                item.league.standings.forEach(standing=>{
-                    var tbodyRef = document.getElementById('table').getElementsByTagName('tbody')[0];
-                    standing.forEach(s=>{
-                        var newRow = tbodyRef.insertRow();
 
-                        var newCell1 = newRow.insertCell();
-                        var newText1 = document.createTextNode(s.rank);
-                        newCell1.appendChild(newText1);
+            if(data.response.length>0){
+                 // var standing = data.response[0].league.standings[0];
+                 //
+                 // document.getElementById('group').innerText = standing[0].group;
+                document.getElementById('showTable').style.display = "block";
+                if(data.response[0].league.standings.length>1){
 
-                        var newCell2 = newRow.insertCell();
-                        var img = document.createElement("img")
-                        img.src = s.team.logo;
-                        img.width="40";
-                        img.height="40";
-                        newCell2.appendChild(img);
+                    var textNode = document.createTextNode("Group")
+                    document.getElementById('showGroupCell').appendChild(textNode);
+                    data.response.forEach(item=>{
+                        item.league.standings.forEach(standing=>{
+                            var tbodyRef = document.getElementById('table').getElementsByTagName('tbody')[1];
+                            standing.forEach(s=>{
+                                var newRow = tbodyRef.insertRow();
+
+                                var newCell1 = newRow.insertCell();
+                                var newText1 = document.createTextNode(s.group);
+                                newCell1.appendChild(newText1);
+
+                                var newCell2 = newRow.insertCell();
+                                var newText2 = document.createTextNode(s.rank);
+                                newCell2.appendChild(newText2);
+
+                                var newCell3 = newRow.insertCell();
+                                var span1 = document.createElement('span')
+                                var img = document.createElement("img")
+                                img.src = s.team.logo;
+                                img.width="40";
+                                img.height="40";
+                                span1.appendChild(img)
+                                var span2 = document.createElement('span');
+                                var a = document.createElement('a');
+                                a.href = "/Football/team/" + s.team.id;
+                                a.text = s.team.name;
+                                span2.appendChild(a);
+                                span2.style.position= "relative";
+                                span2.style.left = "15px"
+                                var div = document.createElement('div');
+                                div.appendChild(span1)
+                                div.appendChild(span2)
+                                newCell3.appendChild(div);
+                                // newCell3.innerHTML='<a href="'+ "/Football/team/" + s.team.id + '">'+s.team.name+"</a>";
+
+                                var newCell4 = newRow.insertCell();
+                                var newText4 = document.createTextNode(s.all.played);
+                                newCell4.appendChild(newText4);
+
+                                var newCell5 = newRow.insertCell();
+                                var newText5 = document.createTextNode(s.all.win);
+                                newCell5.appendChild(newText5);
+
+                                var newCell6 = newRow.insertCell();
+                                var newText6 = document.createTextNode(s.all.draw);
+                                newCell6.appendChild(newText6);
 
 
-                        var newCell3 = newRow.insertCell();
-                        newCell3.innerHTML='<a href="'+ "/Football/team/" + s.team.id + '">'+s.team.name+"</a>";
+                                var newCell7 = newRow.insertCell();
+                                var newText7 = document.createTextNode(s.all.lose);
+                                newCell7.appendChild(newText7);
 
-                        var newCell4 = newRow.insertCell();
-                        var newText4 = document.createTextNode(s.all.played);
-                        newCell4.appendChild(newText4);
+                                var newCell8 = newRow.insertCell();
+                                var newText8 = document.createTextNode(s.all.goals.for);
+                                newCell8.appendChild(newText8);
 
-                        var newCell5 = newRow.insertCell();
-                        var newText5 = document.createTextNode(s.all.win);
-                        newCell5.appendChild(newText5);
+                                var newCell9 = newRow.insertCell();
+                                var newText9 = document.createTextNode(s.all.goals.against);
+                                newCell9.appendChild(newText9);
 
-                        var newCell6 = newRow.insertCell();
-                        var newText6 = document.createTextNode(s.all.draw);
-                        newCell6.appendChild(newText6);
+                                var newCell10 = newRow.insertCell();
+                                var newText10 = document.createTextNode(s.goalsDiff);
+                                newCell10.appendChild(newText10);
 
+                                var newCell11 = newRow.insertCell();
+                                var newText11 = document.createTextNode(s.points);
+                                newCell11.appendChild(newText11);
 
-                        var newCell7 = newRow.insertCell();
-                        var newText7 = document.createTextNode(s.all.lose);
-                        newCell7.appendChild(newText7);
-
-                        var newCell8 = newRow.insertCell();
-                        var newText8 = document.createTextNode(s.all.goals.for);
-                        newCell8.appendChild(newText8);
-
-                        var newCell9 = newRow.insertCell();
-                        var newText9 = document.createTextNode(s.all.goals.against);
-                        newCell9.appendChild(newText9);
-
-                        var newCell10 = newRow.insertCell();
-                        var newText10 = document.createTextNode(s.goalsDiff);
-                        newCell10.appendChild(newText10);
-
-                        var newCell11 = newRow.insertCell();
-                        var newText11 = document.createTextNode(s.points);
-                        newCell11.appendChild(newText11);
-
-                        var newCell12 = newRow.insertCell();
-                        var newText12 = null;
-                        if(s.form!=null) {
-                            newText12 = document.createTextNode(s.form);
-                        }else {
-                            newText12 = document.createTextNode("");
-                        }
-                        newCell12.appendChild(newText12);
+                                var newCell12 = newRow.insertCell();
+                                var newText12 = null;
+                                if(s.form!=null) {
+                                    newText12 = document.createTextNode(s.form);
+                                }else {
+                                    newText12 = document.createTextNode("");
+                                }
+                                newCell12.appendChild(newText12);
+                            })
+                        })
                     })
-                })
-            })
+                }else {
+                    data.response.forEach(item=>{
+                        item.league.standings.forEach(standing=>{
+                            var tbodyRef = document.getElementById('table').getElementsByTagName('tbody')[1];
+                            standing.forEach(s=>{
+                                var newRow = tbodyRef.insertRow();
+
+                                var newCell1 = newRow.insertCell();
+                                var newText1 = document.createTextNode("");
+                                newCell1.appendChild(newText1);
+
+                                var newCell2 = newRow.insertCell();
+                                var newText2 = document.createTextNode(s.rank);
+                                newCell2.appendChild(newText2);
+
+                                var newCell3 = newRow.insertCell();
+                                var span1 = document.createElement('span')
+                                var img = document.createElement("img")
+                                img.src = s.team.logo;
+                                img.width="40";
+                                img.height="40";
+                                span1.appendChild(img)
+                                var span2 = document.createElement('span');
+                                var a = document.createElement('a');
+                                a.href = "/Football/team/" + s.team.id;
+                                a.text = s.team.name;
+                                span2.appendChild(a);
+                                span2.style.position= "relative";
+                                span2.style.left = "15px"
+                                var div = document.createElement('div');
+                                div.appendChild(span1)
+                                div.appendChild(span2)
+                                newCell3.appendChild(div);
+                                // newCell3.innerHTML='<a href="'+ "/Football/team/" + s.team.id + '">'+s.team.name+"</a>";
+
+                                var newCell4 = newRow.insertCell();
+                                var newText4 = document.createTextNode(s.all.played);
+                                newCell4.appendChild(newText4);
+
+                                var newCell5 = newRow.insertCell();
+                                var newText5 = document.createTextNode(s.all.win);
+                                newCell5.appendChild(newText5);
+
+                                var newCell6 = newRow.insertCell();
+                                var newText6 = document.createTextNode(s.all.draw);
+                                newCell6.appendChild(newText6);
+
+
+                                var newCell7 = newRow.insertCell();
+                                var newText7 = document.createTextNode(s.all.lose);
+                                newCell7.appendChild(newText7);
+
+                                var newCell8 = newRow.insertCell();
+                                var newText8 = document.createTextNode(s.all.goals.for);
+                                newCell8.appendChild(newText8);
+
+                                var newCell9 = newRow.insertCell();
+                                var newText9 = document.createTextNode(s.all.goals.against);
+                                newCell9.appendChild(newText9);
+
+                                var newCell10 = newRow.insertCell();
+                                var newText10 = document.createTextNode(s.goalsDiff);
+                                newCell10.appendChild(newText10);
+
+                                var newCell11 = newRow.insertCell();
+                                var newText11 = document.createTextNode(s.points);
+                                newCell11.appendChild(newText11);
+
+                                var newCell12 = newRow.insertCell();
+                                var newText12 = null;
+                                if(s.form!=null) {
+                                    newText12 = document.createTextNode(s.form);
+                                }else {
+                                    newText12 = document.createTextNode("");
+                                }
+                                newCell12.appendChild(newText12);
+                            })
+                        })
+                    })
+                }
+            }else {
+                document.getElementById('showTable').style.display = "none";
+            }
         })
         .catch(error=>console.log(error));
 }
 
-function LeagueTopScorers(league,season){
+function LeagueTopScorers(league,season) {
 
-    const url = 'https://api-football-beta.p.rapidapi.com/players/topscorers?season='+season+'&league='+league;
+    const url = 'https://api-football-beta.p.rapidapi.com/players/topscorers?season=' + season + '&league=' + league;
     const options = {
         method: 'GET',
         headers: {
 
             'X-RapidAPI-Key': apiKey
-            ,'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
+            , 'X-RapidAPI-Host': 'api-football-beta.p.rapidapi.com'
         }
     };
 
 
-    fetch(url,options)
-        .then(res=>{
+    fetch(url, options)
+        .then(res => {
             return res.json();
         })
-        .then(data=> {
+        .then(data => {
 
             var tbodyRef = document.getElementById('tsTable').getElementsByTagName('tbody')[0]
 
@@ -300,28 +445,50 @@ function LeagueTopScorers(league,season){
                 stbody.removeChild(stbody.lastChild);
             }
 
-            data.response.forEach(item => {
+            if(data.response.length>0){
 
-                var newRow = tbodyRef.insertRow();
+                document.getElementById('nameScorers').style.display = "block";
+                document.getElementById('tableScorers').style.display = "block";
 
-                var newCell1 = newRow.insertCell();
-                newCell1.innerHTML = '<img src="' + item.player.photo + '" height="25" width="25"/>'
-                    + '<span style="margin-left: 10px"><b>' + item.player.name + "</b></span>";
-                item.statistics.forEach(stat => {
-                    var newCell2 = newRow.insertCell();
-                    newCell2.innerHTML = '<img src="' + stat.team.logo + '" height="25" width="25"/>'
-                        + '<span style="margin-left: 10px"><b>' + stat.team.name + "</b></span>";
+                data.response.forEach(item => {
 
-                    var newCell3 = newRow.insertCell();
-                    newCell3.innerHTML = stat.goals.total;
+                    var newRow = tbodyRef.insertRow();
 
-                    var newCell4 = newRow.insertCell();
-                    newCell4.innerHTML = stat.penalty.scored;
+                    var newCell1 = newRow.insertCell();
+                    newCell1.innerHTML = '<img src="' + item.player.photo + '" height="25" width="25"/>'
+                        + '<span style="margin-left: 10px"><b>' + item.player.name + "</b></span>";
+                    item.statistics.forEach(stat => {
+                        var newCell2 = newRow.insertCell();
+                        newCell2.innerHTML = '<img src="' + stat.team.logo + '" height="25" width="25"/>'
+                            + '<span style="margin-left: 10px"><b>' + stat.team.name + "</b></span>";
 
-                    var newCell5 = newRow.insertCell();
-                    newCell5.innerHTML = stat.goals.total;
 
+                        var newCell3 = newRow.insertCell();
+                        if (stat.goals.total != null) {
+                            newCell3.innerHTML = stat.goals.total;
+                        } else {
+                            newCell3.innerHTML = "0";
+                        }
+
+                        var newCell4 = newRow.insertCell();
+                        if (stat.penalty.scored != null) {
+                            newCell4.innerHTML = stat.penalty.scored;
+                        } else {
+                            newCell4.innerHTML = "0"
+                        }
+
+                        var newCell5 = newRow.insertCell();
+                        if (stat.goals.total != null) {
+                            newCell5.innerHTML = stat.goals.total;
+                        } else {
+                            newCell5.innerHTML = "0";
+                        }
+
+                    })
                 })
-            })
+            }else {
+                document.getElementById('nameScorers').style.display = "none";
+                document.getElementById('tableScorers').style.display = "none";
+            }
         })
 }

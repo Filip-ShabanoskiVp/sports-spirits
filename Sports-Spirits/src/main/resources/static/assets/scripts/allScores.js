@@ -53,7 +53,7 @@ function showLiveScores(){
                 newCell6.appendChild(newText6);
 
                 if(item.fixture.status.short=="1H" || item.fixture.status.short=="2H"
-                    || item.fixture.status.short=="H" || item.fixture.status.short=="ET"
+                    || item.fixture.status.short=="HT" || item.fixture.status.short=="ET"
                     || item.fixture.status.short=="P"){
                     var newCell7 = newRow.insertCell();
                     newCell7.innerHTML = "<span style='color: green'>" + item.fixture.status.elapsed + '"' + '</span>'

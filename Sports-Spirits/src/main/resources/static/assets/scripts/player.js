@@ -124,9 +124,9 @@ function showTrophies(){
 }
 // showTrophies();
 
-function showPlayerStatistics(){
+function showPlayerStatistics(season){
 
-    const url = 'https://api-football-beta.p.rapidapi.com/players?season=2022&id='+playerId;
+    const url = 'https://api-football-beta.p.rapidapi.com/players?season='+season+'&id='+playerId;
     const options = {
         method: 'GET',
         headers: {
@@ -149,55 +149,114 @@ function showPlayerStatistics(){
                 var newRow = bodyRef.insertRow();
 
                 var newCell1 = newRow.insertCell();
-                var newText1 = document.createTextNode(stat.league.season);
+                var newText1;
+                if(stat.league.season==null){
+                    newText1 = document.createTextNode("");
+                }else {
+                    newText1 = document.createTextNode(stat.league.season);
+                }
                 newCell1.appendChild(newText1);
 
                 var newCell2 = newRow.insertCell();
-                var newText2 = document.createTextNode(stat.team.name);
+                var newText2;
+                if(stat.team.name==null){
+                    newText2 = document.createTextNode("");
+                }else {
+                    newText2 = document.createTextNode(stat.team.name);
+                }
                 newCell2.appendChild(newText2);
 
                 var newCell3 = newRow.insertCell();
-                newCell3.innerHTML = '<img src="'+stat.league.logo +'" height="25" width="25"/>'
+                if(stat.league.logo==null){
+                    newCell3.innerHTML = '<img src="#" height="25" width="25"/>'
+                }else {
+                    newCell3.innerHTML = '<img src="' + stat.league.logo + '" height="25" width="25"/>'
+                }
 
                 var newCell4 = newRow.insertCell();
-                var newText4 = document.createTextNode(stat.league.name);
+                var newText4;
+                if(stat.league.name==null){
+                    newText4 = document.createTextNode("");
+                }else {
+                    newText4 = document.createTextNode(stat.league.name);
+                }
                 newCell4.appendChild(newText4);
 
+
                 var newCell5 = newRow.insertCell();
-                var newText5 = document.createTextNode(stat.games.minutes);
+                var newText5;
+                if(stat.games.minutes==null) {
+                    newText5 = document.createTextNode("0");
+                }else {
+                    newText5 = document.createTextNode(stat.games.minutes);
+                }
                 newCell5.appendChild(newText5);
 
 
                 var newCell6 = newRow.insertCell();
-                var newText6 = document.createTextNode(stat.games.appearences);
+                var newText6;
+                if(stat.games.appearences==null) {
+                    newText6 = document.createTextNode("0");
+                }else {
+                    newText6 = document.createTextNode(stat.games.appearences);
+                }
                 newCell6.appendChild(newText6);
 
                 var newCell7 = newRow.insertCell();
-                var newText7 = document.createTextNode(stat.goals.total);
+                var newText7;
+                if(stat.goals.total==null) {
+                    newText7 = document.createTextNode("0");
+                }else {
+                    newText7 = document.createTextNode(stat.goals.total);
+                }
                 newCell7.appendChild(newText7);
 
                 var newCell8 = newRow.insertCell();
-                var newText8 = document.createTextNode(stat.goals.assists);
+                var newText8;
+                if(stat.goals.assists==null) {
+                    newText8 = document.createTextNode("0");
+                }else {
+                    newText8 = document.createTextNode(stat.goals.assists);
+                }
                 newCell8.appendChild(newText8);
 
 
                 var newCell9 = newRow.insertCell();
-                var newText9 = document.createTextNode(stat.shots.total);
+                var newText9;
+                if(stat.shots.total==null) {
+                    newText9 = document.createTextNode("0");
+                }else {
+                    newText9 = document.createTextNode(stat.shots.total);
+                }
                 newCell9.appendChild(newText9);
 
-
-                var newCell0 = newRow.insertCell();
-                var newText10 = document.createTextNode(stat.passes.total);
-                newCell0.appendChild(newText10);
+                var newCell10 = newRow.insertCell();
+                var newText10;
+                if (stat.passes.total==null) {
+                    newText10 = document.createTextNode("0");
+                }else {
+                    newText10 = document.createTextNode(stat.passes.total);
+                }
+                newCell10.appendChild(newText10);
 
 
                 var newCell11 = newRow.insertCell();
-                var newText11 = document.createTextNode(stat.cards.yellow);
+                var newText11;
+                if(stat.cards.yellow==null) {
+                    newText11 = document.createTextNode("0");
+                }else {
+                    newText11 = document.createTextNode(stat.cards.yellow);
+                }
                 newCell11.appendChild(newText11);
 
 
                 var newCell12 = newRow.insertCell();
-                var newText12 = document.createTextNode(stat.cards.red);
+                var newText12;
+                if(stat.cards.red==null) {
+                    newText12 = document.createTextNode("0");
+                }else {
+                    newText12 = document.createTextNode(stat.cards.red);
+                }
                 newCell12.appendChild(newText12);
 
             })
@@ -205,4 +264,28 @@ function showPlayerStatistics(){
     })
 }
 
-// showPlayerStatistics();
+function showPlayerSeasons(){
+    var seasons = ["2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011",
+        "2010"]
+        for (var i=0; i< seasons.length; i++) {
+            var x = document.getElementById("seasonPlayer");
+            var option = document.createElement("option");
+            var year = parseInt(seasons[i]) + 1;
+            option.text = seasons[i] + "/" + year;
+            option.value = seasons[i];
+            x.add(option);
+        }
+    showPlayerStatistics(seasons[0])
+    }
+// showPlayerSeasons();
+
+
+
+function changePlayerSeason(){
+    var season = document.getElementById("seasonPlayer").value;
+    let resBody = document.getElementById("playerBody");
+    while (resBody.hasChildNodes()){
+        resBody.removeChild(resBody.lastChild);
+    }
+    showPlayerStatistics(season);
+}

@@ -39,4 +39,4 @@ function getLeagues(){
         })
     })
 }
-// getLeagues()
+getLeagues()

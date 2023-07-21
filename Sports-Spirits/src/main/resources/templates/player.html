@@ -43,7 +43,12 @@
     <div class="col-11">
       <div class="card">
         <div class="card-header bg-dark">
-          <h3 class="text-white">Last season statistics</h3>
+          <h3 class="text-white">Statistics</h3>
+          <div style="position: relative;bottom: 20px">
+            <span class="text-white" style="margin-left: 780px;">Season: </span>
+            <select id="seasonPlayer" onchange="changePlayerSeason()" class="form-select">
+            </select>
+          </div>
         </div>
         <div class="card-body">
           <table class="table table-striped" id="stats">
@@ -63,8 +68,7 @@
               <th>Red Card</th>
             </tr>
             </thead>
-            <tbody>
-
+            <tbody id="playerBody">
             </tbody>
           </table>
         </div>

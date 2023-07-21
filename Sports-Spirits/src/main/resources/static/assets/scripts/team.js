@@ -45,9 +45,9 @@ function showTeam(){
 }
 // showTeam()
 
-function showTeamSquad() {
+function showTeamSquad(season) {
 
-    const url = 'https://api-football-beta.p.rapidapi.com/players?season=2023&team=' + teamId;
+    const url = 'https://api-football-beta.p.rapidapi.com/players?season='+season+'&team=' + teamId;
     const options = {
         method: 'GET',
         headers: {
@@ -66,18 +66,16 @@ function showTeamSquad() {
         var tbodyRef4 = document.getElementById('squad').getElementsByTagName('tbody')[7];
 
         var leagueIdArray = [];
-        var i = 0;
-        console.log(data);
-        data.response.forEach(item => {
-            item.statistics.forEach(stat => {
 
+        for (var i =0; i< data.response.length; i++){
+            leagueIdArray[i] = data.response[i].statistics[0].league.id;
+        }
+
+        data.response.forEach(item => {
 
                 var newRow,newCell1,newCell2;
 
-                leagueIdArray[i] = {id: stat.league.id};
-                i++;
-
-                if (stat.games.position == "Goalkeeper" && item.player.name!=null) {
+                if (item.statistics[0].games.position == "Goalkeeper" && item.player.name!=null) {
 
                     newRow = tbodyRef1.insertRow();
 
@@ -89,8 +87,7 @@ function showTeamSquad() {
                         + item.player.id + '" style="text-decoration: none;color: black">'
                         + item.player.name + "</a>";
 
-                } else if (stat.games.position == "Defender"  && item.player.name!=null) {
-
+                } else if (item.statistics[0].games.position == "Defender"  && item.player.name!=null) {
 
                     newRow = tbodyRef2.insertRow();
 
@@ -104,7 +101,7 @@ function showTeamSquad() {
                         + item.player.name + "</a>";
 
 
-                } else if (stat.games.position == "Midfielder"  && item.player.name!=null) {
+                } else if (item.statistics[0].games.position == "Midfielder"  && item.player.name!=null) {
 
                     newRow = tbodyRef3.insertRow();
 
@@ -116,7 +113,8 @@ function showTeamSquad() {
                         + item.player.id + '" style="text-decoration: none;color: black">'
                         + item.player.name + "</a>";
 
-                } else if (stat.games.position == "Attacker"  && item.player.name!=null) {
+                } else if (item.statistics[0].games.position == "Attacker"  && item.player.name!=null) {
+
 
                     newRow = tbodyRef4.insertRow();
 
@@ -129,19 +127,17 @@ function showTeamSquad() {
                         + item.player.name + "</a>";
 
                 }
-            })
         })
         if(data.response.length>0) {
             var navTeamDetails = document.createElement('a');
             var textNode = document.createTextNode("Table");
-            navTeamDetails.setAttribute("href", "/Football/league/" + leagueIdArray[0].id + "/League")
+            navTeamDetails.setAttribute("href", "/Football/league/" + leagueIdArray[0] + "/League")
             navTeamDetails.className = "nav-link";
             navTeamDetails.appendChild(textNode);
             document.getElementById('leagueTable').appendChild(navTeamDetails);
         }
     })
 }
-// showTeamSquad();
 
 function showCoach(){
     const url = 'https://api-football-beta.p.rapidapi.com/coachs?team='+teamId;
@@ -184,3 +180,50 @@ function showCoach(){
     })
 }
 // showCoach();
+
+function showTeamSquadSeasons(){
+    var seasons = ["2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011",
+        "2010"]
+
+    for (var i=0; i< seasons.length; i++){
+        var x = document.getElementById("seasonSquad");
+        var option = document.createElement("option");
+        var year =parseInt(seasons[i])+1;
+        option.text = seasons[i] + "/"+ year;
+        option.value = seasons[i];
+        x.add(option);
+    }
+    showTeamSquad(seasons[0]);
+}
+// showTeamSquadSeasons();
+
+function changeSquadSeason(){
+    var season = document.getElementById("seasonSquad").value;
+    let gkBody = document.getElementById("gk");
+    let dBody = document.getElementById("d");
+    let mBody = document.getElementById("m");
+    let fBody = document.getElementById("f");
+
+    let leagueTable = document.getElementById("leagueTable");
+
+    while (gkBody.hasChildNodes()){
+        gkBody.removeChild(gkBody.lastChild);
+    }
+    while (dBody.hasChildNodes()){
+        dBody.removeChild(dBody.lastChild);
+    }
+
+    while (mBody.hasChildNodes()){
+        mBody.removeChild(mBody.lastChild);
+    }
+
+    while (fBody.hasChildNodes()){
+        fBody.removeChild(fBody.lastChild);
+    }
+
+    while (leagueTable.hasChildNodes()){
+        leagueTable.removeChild(leagueTable.lastChild);
+    }
+
+    showTeamSquad(season);
+}

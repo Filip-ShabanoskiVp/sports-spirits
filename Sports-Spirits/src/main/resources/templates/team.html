@@ -21,7 +21,6 @@
                             <li class="nav-item" id="leagueTable">
                             </li>
                             <li class="nav-item" id="transfersLink">
-<!--                                <a class="nav-link" th:href="@{/Football/team/{teamId}/transfers(teamId=${teamId})}">Transfers</a>-->
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" th:href="@{/Football/team/{teamId}/results(teamId=${teamId})}">Results</a>
@@ -71,6 +70,11 @@
                 <div class="card">
                     <div class="card-header bg-danger">
                         <h2 class="text-white">Squad</h2>
+                        <div style="position: relative;bottom: 20px">
+                            <span class="text-white" style="margin-left: 910px;">Season: </span>
+                            <select id="seasonSquad" onchange="changeSquadSeason()" class="form-select">
+                            </select>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -82,7 +86,7 @@
                                         <th></th>
                                     </tr>
                                     </thead>
-                                    <tbody id="gk" >
+                                    <tbody>
                                     </tbody>
                                     <thead>
                                     <tr>
@@ -90,7 +94,7 @@
                                         <th>Name</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="gk">
                                     </tbody>
                                     <thead>
                                     <tr class="bg-dark">
@@ -98,7 +102,7 @@
                                         <th></th>
                                     </tr>
                                     </thead>
-                                    <tbody id="d">
+                                    <tbody>
                                     </tbody>
                                     <thead>
                                     <tr>
@@ -106,7 +110,7 @@
                                         <th>Name</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="d">
                                     </tbody>
                                     <thead>
                                     <tr class="bg-dark">
@@ -114,7 +118,7 @@
                                         <th></th>
                                     </tr>
                                     </thead>
-                                    <tbody id="m">
+                                    <tbody>
                                     </tbody>
                                     <thead>
                                     <thead>
@@ -123,7 +127,7 @@
                                         <th>Name</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="m">
                                     </tbody>
                                     <thead>
                                     <tr class="bg-dark">
@@ -139,8 +143,6 @@
                                         <th>Name</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    </tbody>
                                     <tbody id="f">
                                     </tbody>
                                     <thead>

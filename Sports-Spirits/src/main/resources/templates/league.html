@@ -16,6 +16,7 @@
 <header th:replace="fragments/header"></header>
 
 <input type="hidden" id="leagueId" th:value="${id}">
+<input type="hidden" id="type" th:value="${type}">
 
 <div style="margin-top: 88px" class="row">
     <div class="col-1" id="leagueLogo"></div>
@@ -40,7 +41,7 @@
     <select id="round" onchange="changeRound()" style="margin-left: 10px" class="form-select">
     </select>
 </div>
-<div class="row" style="margin-left: 20px">
+<div class="row" style="margin-left: 20px" id="ResultShow">
     <div class="card" style="width: 100%">
         <div class="card-body">
             <table class="table table-striped" id="fTable">
@@ -60,15 +61,32 @@
         </div>
     </div>
 </div>
-<div class="row bg-dark" style="margin-left: 20px;margin-top: 15px">
-    <h3 class="text-white">Table</h3>
-</div>
+
+<div id="showTable">
 <div class="row" style="margin-left: 20px;margin-top: 20px">
     <table class="table table-striped sTable" id="table">
         <thead>
-        <tr>
-            <th>Rank</th>
+        <tr class="bg-dark">
+            <th class="text-white"><h2><span id="group"></span> Table</h2></th>
             <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody id="tGroup">
+        </tbody>
+        <thead>
+        <tr>
+            <th id="showGroupCell"></th>
+            <th>Rank</th>
             <th>Team</th>
             <th>MP</th>
             <th>W</th>
@@ -82,14 +100,14 @@
         </tr>
         </thead>
         <tbody id="tBody">
-
         </tbody>
     </table>
 </div>
-<div class="row bg-dark" style="margin-left: 20px;margin-top: 20px">
+</div>
+<div class="row bg-dark" style="margin-left: 20px;margin-top: 20px" id="nameScorers">
     <h3 class="text-white">Top Scorers</h3>
 </div>
-<div class="row" style="margin-left: 20px;margin-top: 45px">
+<div class="row" style="margin-left: 20px;margin-top: 45px" id="tableScorers">
 
     <table class="table table-striped" id="tsTable" >
         <thead>

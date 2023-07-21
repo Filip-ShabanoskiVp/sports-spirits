@@ -238,7 +238,7 @@ function matchDetailsAndMatchOfficials(){
 
                 document.getElementById('fixRound').innerText = item.league.round;
                 if(item.fixture.status.short=="1H" || item.fixture.status.short=="2H"
-                    || item.fixture.status.short=="H" || item.fixture.status.short=="ET"
+                    || item.fixture.status.short=="HT" || item.fixture.status.short=="ET"
                  || item.fixture.status.short=="P"){
                     document.getElementById('fixStartTime').innerText =
                         "KO "+ item.fixture.date.substring(11, 16) + " ("+item.fixture.status.elapsed +' ")';
