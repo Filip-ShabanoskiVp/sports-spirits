@@ -7,6 +7,15 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
           crossorigin="anonymous">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script
+            src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+            integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY="
+            crossorigin="anonymous"></script>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+          rel="stylesheet" type="text/css" />
 </head>
 <body>
 <header th:replace="fragments/header"></header>
@@ -15,59 +24,96 @@
         <div class="col-12 card">
             <div class="card" style="margin-top: 65px;">
                 <div class="card-header">
-                    <h2>Checkout</h2>
+                    <h2>Shopping Cart</h2>
+                </div>
+                <div th:if="${param.message}">
+                    <h2 class="text-center text-primary" th:text="${param.message}"></h2>
+                </div>
+
+                <div th:if="${param.error}">
+                    <h2 class="text-center text-danger" th:text="${param.error}"></h2>
                 </div>
                 <div class="card-body">
-                    <form action="/shopping-carts" method="post">
-                        <h1 th:if="${param.error}" th:text="${param.error}"></h1>
-                        <div class="table-responsive" style=" height:150px;overflow:auto;
+                    <div class="row">
+                        <div class="col-9">
+                            <form action="/shopping-carts" method="post">
+                                <div class="table-responsive" style=" height:150px;overflow:auto;
                         margin-top:20px;">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>image</th>
-                                    <th>name</th>
-                                    <th>localDateTime</th>
-                                    <th>description</th>
-                                    <th>cost</th>
-                                    <th>manufacturer</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="product: ${shoppingCart.getProducts()}">
-                                    <td><img th:src="${product.getProductImage()}"
-                                             width="100px"height="100px"></td>
-                                    <td th:text="${product.getName()}"></td>
-                                    <td th:text="${product.getLocalDateTime()}"></td>
-                                    <td th:text="${product.getDescription()}"></td>
-                                    <td th:text="${product.getCost()}"></td>
-                                    <td th:text="${product.getManufacturer().getName()}">{{product.manufacturer.name}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
-                            <h3 th:text="${amount/100} + ' ' + ${currency}"></h3>
-                            <br>
-                            <br>
-                        </div>
-                        <br>
-                        <input type='hidden' th:value='${amount}' name='amount' />
-                        <input type='hidden' th:value='${currency}' name='currency' />
-                        <script
-                                src='https://checkout.stripe.com/checkout.js'
-                                class='stripe-button'
-                                th:attr='data-key=${publicKey},
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Name</th>
+                                            <th>description</th>
+                                            <th>Quantity</th>
+                                            <th>Cost</th>
+                                            <th>Manufacturer</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="product: ${shoppingCart.getProducts()}">
+                                            <td><img th:src="${product.getProductImage()}"
+                                                     width="100px"height="100px"></td>
+                                            <td th:text="${product.getName()}"></td>
+                                            <td th:text="${product.getDescription()}"></td>
+                                            <td>1</td>
+                                            <td><span th:text="${product.getCost()}"></span> <span>$</span></td>
+                                            <td th:text="${product.getManufacturer().getName()}">{{product.manufacturer.name}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row" style="margin-left: 10px;margin-top: 10px">
+                                    <h3 th:text="${amount/100} + ' ' + ${currency}"></h3>
+                                    <br>
+                                    <br>
+                                </div>
+                                <br>
+                                <input type='hidden' th:value='${amount}' name='amount' />
+                                <input type='hidden' th:value='${currency}' name='currency' />
+                                <script
+                                        src='https://checkout.stripe.com/checkout.js'
+                                        class='stripe-button'
+                                        th:attr='data-key=${publicKey},
          data-amount=${amount},
          data-currency=${currency}'
-                                data-name='Sports Spirits'
-                                data-description='Sports Spirits checkout'
-                                data-image
-                                        ='https://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'
-                                data-locale='auto'
-                                data-zip-code='false'>
-                        </script>
-                    </form>
+                                        data-name='Sports Spirits'
+                                        data-description='Sports Spirits checkout'
+                                        data-image
+                                                ='https://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'
+                                        data-locale='auto'
+                                        data-zip-code='false'>
+                                </script>
+                            </form>
+                        </div>
+                        <div class="col-3" style="position: relative;right: 5px"
+                             th:if="${shoppingCart.getProducts().size()>0}">
+                            <div class="table-responsive" style=" height:150px;overflow:auto;
+                        margin-top:20px;">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="product: ${shoppingCart.getProducts()}">
+                                        <td>
+                                            <button type="button"
+                                                    th:data-parameter1="${product.getId()}"
+                                                    th:data-parameter2="${product.getQuantity()}"
+                                                    th:id="${product.getId()}" class="btn btn-danger"
+                                                    sec:authorize="hasRole('ROLE_USER')"
+                                                    onclick="show(this.getAttribute('data-parameter1')
+                                    ,this.getAttribute('data-parameter2'))"
+                                            >Remove from Cart</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <form th:action="@{/shopping-carts/cancel}" th:method="post">
@@ -80,5 +126,70 @@
         </div>
     </div>
 </div>
+
+
+
+<div id="dialog" title="Remove product from cart">
+    <div id="rez"></div>
+</div>
+
+
+<script>
+
+    function show(id,quantity){
+
+        $(document).ready(function() {
+
+            $( "#dialog" ).dialog({
+                autoOpen: false,
+                modal: true,
+            });
+
+            var getRez = document.getElementById('rez');
+            while (getRez.hasChildNodes()){
+                getRez.removeChild(getRez.lastChild);
+            }
+
+            $("#dialog").dialog("open");
+
+            var form = document.createElement('form');
+            form.action = "/shopping-carts/"+id+"/remove-product";
+            form.method = "post";
+
+            var div = document.createElement('div');
+            div.classList = "form-group";
+            var label = document.createElement('label');
+            label.textContent = "Select product quantity";
+            div.appendChild(label)
+            var input = document.createElement('input');
+            input.type = "number";
+            input.id = "quantity"
+            input.name = "quantity";
+            input.classList = "form-control";
+            input.placeholder = "Enter quantity";
+            input.min = "1";
+            input.max = "1";
+            input.value = "1";
+            input.onkeydown = function (){preventKeyboardInput(event);};
+            div.appendChild(input)
+            form.appendChild(div)
+            var btn = document.createElement('button');
+            btn.type = "submit";
+            btn.classList = "btn btn-danger";
+            btn.textContent = "Remove to Cart";
+            form.appendChild(btn);
+            document.getElementById('rez').appendChild(form);
+
+        });
+
+
+    }
+
+</script>
+<script>
+    function preventKeyboardInput(event) {
+        event.preventDefault();
+    }
+</script>
 </body>
 </html>

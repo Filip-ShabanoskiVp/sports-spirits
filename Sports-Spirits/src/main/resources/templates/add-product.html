@@ -17,7 +17,7 @@
                   method="post" th:object="${product}">
                 <input type="hidden" name="id" th:value="${product.getId()}"/>
                 <div class="card" style="position: relative;bottom: 30px;">
-                    <div class="card-header" style="background-color: grey">
+                    <div class="card-header bg-dark" >
                         <h2 class="text-white">Add product</h2>
                     </div>
                     <div class="card-body">
@@ -47,6 +47,7 @@
                             <label for="quantity">Quantity</label>
                             <input type="number" class="form-control"
                                    id="quantity" name="quantity"
+                                   min="1"
                                    th:value="${product.quantity}"
                                    th:field="*{quantity}"
                                    required
@@ -90,7 +91,7 @@
                             <input type="file" class="form-control" id="image" name="image">
                         </div>
                     </div>
-                    <div style="background-color: grey;" class="card-footer">
+                    <div class="card-footer bg-dark">
                         <button  type="submit" class="btn btn-primary">Save</button>
                         <a href="/products" class="btn btn-success"
                            style="margin-left: 10px;">Back</a>

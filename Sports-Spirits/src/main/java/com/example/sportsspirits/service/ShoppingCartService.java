@@ -12,16 +12,18 @@ public interface ShoppingCartService {
     ShoppingCart createNewShoppingCart(String userId);
 
     ShoppingCart addProductToShoppingCart(String userId,
-                                          Long productId);
+                                          Long productId, int quantity);
 
     ShoppingCart removeProductFromShoppingCart(String userId,
-                                               Long productId);
+                                               Long productId, int quantity);
 
     ShoppingCart getActiveShoppingCart(String userId);
 
     ShoppingCart cancelActiveShoppingCart(String userId);
 
     ShoppingCart checkoutShoppingCart(String username, ChargeRequest chargeRequest);
+
+    List<ShoppingCart> findAll();
 
 
 }

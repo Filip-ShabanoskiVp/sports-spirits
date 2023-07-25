@@ -7,16 +7,53 @@
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
         crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script
+          src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+          integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY="
+          crossorigin="anonymous"></script>
+  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
 </head>
+<style>
+  #modal, .content{
+    margin: 5px;
+  }
+  .content{width:300px;background:#eef; padding: 5px; border:1px gray dotted; font-size: 1.4em;}
+</style>
 <body>
 <header th:replace="fragments/header"></header>
 <h1 style="margin-top: 55px">Basket Ball</h1>
 
+
+
+<input type="button" id="modal" value="Enter data" />
+
+
+<div id="dialog" title="Sample">
+  <p>Enter your name and surname below:</p>
+  <input id="input-data" type="text"/>
+</div>
+
 <script>
-  var string = "Regular Season - 38";
-  console.log(string);
-  string = string.replace(/\s/g,"%20");
-  console.log(string);
+  $(document).ready(function() {
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      modal: true,
+      buttons: {
+        Proceed: function(){
+          $("#data").html($("#input-data").val());
+          //validation here
+          $( "#dialog" ).dialog("close");
+        }
+      }
+    });
+
+    $("#modal").click(function(){
+      $( "#dialog" ).dialog("open");
+    });
+  });
+
 </script>
 </body>
 </html>

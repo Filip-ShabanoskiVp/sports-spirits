@@ -146,7 +146,7 @@ function fixtureLineup() {
         }
     })
 }
-// fixtureLineup();
+fixtureLineup();
 
 function matchDetailsAndMatchOfficials(){
 
@@ -273,7 +273,7 @@ function matchDetailsAndMatchOfficials(){
         }
     })
 }
-// matchDetailsAndMatchOfficials();
+matchDetailsAndMatchOfficials();
 
 function fixtureStatistics(){
 
@@ -691,7 +691,7 @@ function fixtureStatistics(){
     })
 }
 
-// fixtureStatistics();
+fixtureStatistics();
 
 function getH2H(idHome, idAway){
 
@@ -1120,7 +1120,7 @@ function playersFixtureStats(){
         }
     })
 }
-// playersFixtureStats();
+playersFixtureStats();
 
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;

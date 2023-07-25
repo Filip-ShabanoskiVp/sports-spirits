@@ -2,8 +2,10 @@ package com.example.sportsspirits.presentation;
 
 import com.example.sportsspirits.models.Manufacturer;
 import com.example.sportsspirits.models.Product;
+import com.example.sportsspirits.models.ShoppingCart;
 import com.example.sportsspirits.service.ManufacturerService;
 import com.example.sportsspirits.service.ProductService;
+import com.example.sportsspirits.service.ShoppingCartService;
 import jakarta.validation.Valid;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/products")
@@ -21,6 +25,8 @@ public class ProductController {
 
     private final ProductService productService;
     private final ManufacturerService manufacturerService;
+
+
 
     public ProductController(ProductService productService, ManufacturerService manufacturerService) {
         this.productService = productService;
@@ -30,11 +36,13 @@ public class ProductController {
     @GetMapping
     public String ProductHomePage(Model model){
         List<Product> products = this.productService.findAll();
+
         model.addAttribute("products", products);
         return "product";
     }
 
     @GetMapping("/add-new")
+    @Secured("ROLE_ADMIN")
     public String addProduct(Model model){
         List<Manufacturer> manufacturers = this.manufacturerService.findAll();
         model.addAttribute("manufacturers",manufacturers);

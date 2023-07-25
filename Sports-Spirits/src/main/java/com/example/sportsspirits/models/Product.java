@@ -32,7 +32,6 @@ public class Product {
     private String productImage;
 
     @NotNull
-    @Min(value = 1,message = "Quantity must not be less then 1")
     private int quantity;
 
 

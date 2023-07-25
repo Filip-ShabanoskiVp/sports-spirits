@@ -45,7 +45,6 @@ function showSeasonFixtures(league,season,round){
         .then(data=> {
             var fbodyRef = document.getElementById('fTable').getElementsByTagName('tbody')[0];
             if(data.response.length>0){
-                console.log("Noooo");
                 document.getElementById('ResultShow').style.display = "block";
                 data.response.forEach(item => {
                     console.log(item);
@@ -73,7 +72,10 @@ function showSeasonFixtures(league,season,round){
                         newCell5.innerHTML = '<a href="' + "/Football/fixture/"
                             + item.fixture.id + '/details" style="text-decoration: none;color: black">'
                             + item.fixture.date.substring(11, 16) + "</a>";
-                    }else if(item.fixture.status.short=="FT"){
+                    }else if(item.fixture.status.short=="FT" || item.fixture.status.short=="AET"
+                    || item.fixture.status.short=="PEN" ){
+                        console.log(item.goals.home)
+                        console.log(item.goals.away);
                         newCell5.innerHTML = '<a href="' + "/Football/fixture/"
                             + item.fixture.id + '/details" style="text-decoration: none;color: black">'
                             + item.goals.home + " - " + item.goals.away + "</a>";
@@ -135,8 +137,9 @@ function showSeasons(){
 
                     var x = document.getElementById("season");
                     var option = document.createElement("option");
-                    // option.text = season.start.substring(0,4) + "/"+ season.end.substring(0,4);
-                     option.text = season.start.substring(0,4);
+
+                    var year =parseInt(season.start.substring(0,4))+1
+                    option.text = season.start.substring(0,4) + "/"+ year;
                     option.value = season.year;
                     myArray[i] = season.year;
                     i++;
@@ -145,14 +148,14 @@ function showSeasons(){
             })
             if(myArray.length>1){
 
-                // showRounds(myArray[1],myArray[0]);
+                showRounds(myArray[1],myArray[0]);
 
             }else {
 
-                // showRounds(myArray[0],myArray[0]);
+                showRounds(myArray[0],myArray[0]);
             }
-            // showTeams(myArray[0],leagueId);
-            // LeagueTopScorers(leagueId,myArray[0]);
+            showTeams(myArray[0],leagueId);
+            LeagueTopScorers(leagueId,myArray[0]);
         })
 }
 
@@ -177,6 +180,12 @@ function showRounds(roundSeason,currentSeason){
             return res.json();
         })
         .then(data=> {
+
+            let selectbody = document.getElementById("round");
+            while (selectbody.hasChildNodes()){
+                selectbody.removeChild(selectbody.lastChild);
+            }
+
             data.response.forEach(item => {
                 var x = document.getElementById("round");
                 var option = document.createElement("option");
@@ -188,7 +197,7 @@ function showRounds(roundSeason,currentSeason){
 
                 x.add(option);
             })
-            // showSeasonFixtures(leagueId,currentSeason,myArray[0])
+            showSeasonFixtures(leagueId,currentSeason,myArray[0])
         })
 }
 showSeasons();
@@ -207,13 +216,13 @@ function change(){
         showGroupCell.removeChild(showGroupCell.lastChild);
     }
 
-    // showTeams(season,leagueId);
+    showTeams(season,leagueId);
 
-        // changeRound();
-        //
-        // showSeasonFixtures(leagueId, season, round);
+    showRounds(season,season);
+    changeRound();
 
-    // LeagueTopScorers(leagueId,season);
+
+    LeagueTopScorers(leagueId,season);
 }
 
 function changeRound(){
@@ -224,7 +233,7 @@ function changeRound(){
     while (tbody.hasChildNodes()){
         tbody.removeChild(tbody.lastChild);
     }
-    // showSeasonFixtures(leagueId,season,round);
+    showSeasonFixtures(leagueId,season,round);
 }
 
 function showTeams(season,leagueId){
@@ -245,9 +254,7 @@ function showTeams(season,leagueId){
         .then(data=>{
 
             if(data.response.length>0){
-                 // var standing = data.response[0].league.standings[0];
-                 //
-                 // document.getElementById('group').innerText = standing[0].group;
+
                 document.getElementById('showTable').style.display = "block";
                 if(data.response[0].league.standings.length>1){
 
@@ -257,6 +264,8 @@ function showTeams(season,leagueId){
                         item.league.standings.forEach(standing=>{
                             var tbodyRef = document.getElementById('table').getElementsByTagName('tbody')[1];
                             standing.forEach(s=>{
+
+
                                 var newRow = tbodyRef.insertRow();
 
                                 var newCell1 = newRow.insertCell();
@@ -328,6 +337,8 @@ function showTeams(season,leagueId){
                                     newText12 = document.createTextNode("");
                                 }
                                 newCell12.appendChild(newText12);
+
+
                             })
                         })
                     })

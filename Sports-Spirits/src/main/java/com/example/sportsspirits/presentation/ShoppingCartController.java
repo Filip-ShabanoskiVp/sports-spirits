@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 @Secured("ROLE_USER")
@@ -29,7 +27,9 @@ public class ShoppingCartController {
 
     private final ProductService productService;
 
-    public ShoppingCartController(ShoppingCartService shoppingCartService, AuthService authService, ProductService productService) {
+
+    public ShoppingCartController(ShoppingCartService shoppingCartService, AuthService authService,
+                                  ProductService productService) {
         this.shoppingCartService = shoppingCartService;
 
         this.authService = authService;
@@ -41,6 +41,8 @@ public class ShoppingCartController {
         try {
             ShoppingCart shoppingCart = this.shoppingCartService
                     .findActiveShoppingCartByUsername(this.authService.getCurrentUserId());
+
+
             model.addAttribute("shoppingCart",shoppingCart);
             model.addAttribute("currency", "usd");
             model.addAttribute("amount",(int) shoppingCart.getProducts().stream()
@@ -53,10 +55,11 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/{productId}/add-product")
-    public String addProductToShoppingCart(@PathVariable Long productId){
+    public String addProductToShoppingCart(@PathVariable Long productId, @RequestParam int quantity){
         try {
+
             this.shoppingCartService.addProductToShoppingCart(authService.getCurrentUserId(),
-                    productId);
+                    productId,quantity);
         }catch (RuntimeException ex){
             return "redirect:/products?error="+ex.getLocalizedMessage();
         }
@@ -65,11 +68,11 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/{productId}/remove-product")
-    public String removeProductFromShoppingCart(@PathVariable Long productId){
+    public String removeProductFromShoppingCart(@PathVariable Long productId, @RequestParam int quantity){
         this.shoppingCartService.removeProductFromShoppingCart(authService.getCurrentUserId(),
-                productId);
+                productId, quantity);
         Product product = this.productService.findById(productId);
-        return "redirect:/products?message=Product with name:"+product.getName()+" is removed from cart";
+        return "redirect:/shopping-carts?message=Product with name:"+product.getName()+" is removed from cart";
     }
 
     @PostMapping("/cancel")

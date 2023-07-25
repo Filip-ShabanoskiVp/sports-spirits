@@ -7,7 +7,20 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
           crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script
+            src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+            integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY="
+            crossorigin="anonymous"></script>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+          rel="stylesheet" type="text/css" />
 </head>
+<style>
+    #modal{
+        margin: 5px;
+    }
+</style>
 <body>
 <header th:replace="fragments/header"></header>
 <div class="content" style="margin-top: 100px;margin-left: 30px;width: 1285px;">
@@ -20,20 +33,18 @@
             <div th:if="${param.error}">
                 <h2 class="text-center text-danger" th:text="${param.error}"></h2>
             </div>
-            <h2>Products</h2>
+            <h2>Sport Shop</h2>
             <br>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>image</th>
-                        <th>name</th>
-                        <th>localDateTime</th>
-                        <th>description</th>
-                        <th>quantity</th>
-                        <th>cost</th>
-                        <th>manufacturer</th>
                         <th></th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Cost</th>
+                        <th>Manufacturer</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -42,18 +53,21 @@
                     <tbody>
                     <tr th:each="product: ${products}" th:if="${product.getQuantity()>0}">
                         <td><img th:src="${product.getProductImage()}"
-                                 width="100px"height="100px"></td>
+                                 width="100px" height="100px"></td>
                         <td th:text="${product.getName()}"></td>
-                        <td th:text="${product.getLocalDateTime()}"></td>
                         <td th:text="${product.getDescription()}"></td>
                         <td th:text="${product.getQuantity()}"></td>
-                        <td th:text="${product.getCost()}"></td>
+                        <td><span th:text="${product.getCost()}"></span><span> $</span></td>
                         <td th:text="${product.getManufacturer().getName()}">{{product.manufacturer.name}}</td>
                         <td>
-                            <form th:action="@{/shopping-carts/{id}/add-product(id=${product.getId()})}" th:method="post">
-                                <button type="submit" class="btn btn-primary"
-                                        sec:authorize="hasRole('ROLE_USER')">Add to Cart</button>
-                            </form>
+                            <button type="button"
+                                    th:data-parameter1="${product.getId()}"
+                                    th:data-parameter2="${product.getQuantity()}"
+                                    th:id="${product.getId()}" class="btn btn-primary"
+                                    sec:authorize="hasRole('ROLE_USER')"
+                                    onclick="show(this.getAttribute('data-parameter1')
+                                    ,this.getAttribute('data-parameter2'))"
+                            >Add to Cart</button>
                         </td>
                         <td>
                             <a th:href="@{/products/{id}/edit(id=${product.getId()})}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-secondary">Edit</a>
@@ -61,12 +75,6 @@
                         <td>
                             <form th:action="@{/products/{id}/delete(id=${product.getId()})}" th:method="post" sec:authorize="hasRole('ROLE_ADMIN')">
                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form th:action="@{/shopping-carts/{id}/remove-product(id=${product.getId()})}" th:method="post">
-                                <button type="submit" class="btn btn-danger "
-                                        sec:authorize="hasRole('ROLE_USER')">Remove from cart</button>
                             </form>
                         </td>
                     </tr>
@@ -82,5 +90,68 @@
         </div>
     </div>
 </div>
+
+<div id="dialog" title="Add product to cart">
+    <div id="rez"></div>
+</div>
+
+
+<script>
+
+    function show(id, quantity){
+
+         $(document).ready(function() {
+
+           $( "#dialog" ).dialog({
+               autoOpen: false,
+                modal: true,
+            });
+
+            var getRez = document.getElementById('rez');
+             while (getRez.hasChildNodes()){
+                getRez.removeChild(getRez.lastChild);
+            }
+
+            $("#dialog").dialog("open");
+
+            var form = document.createElement('form');
+            form.action = "/shopping-carts/"+id+"/add-product";
+            form.method = "post";
+
+            var div = document.createElement('div');
+            div.classList = "form-group";
+            var label = document.createElement('label');
+            label.textContent = "Select product quantity";
+            div.appendChild(label)
+            var input = document.createElement('input');
+            input.type = "number";
+            input.id = "quantity"
+            input.name = "quantity";
+            input.classList = "form-control";
+            input.placeholder = "Enter quantity";
+            input.min = "1";
+            input.max = "1";
+            input.value = "1";
+            input.onkeydown = function (){preventKeyboardInput(event);};
+            div.appendChild(input)
+            form.appendChild(div)
+             var btn = document.createElement('button');
+            btn.type = "submit";
+             btn.classList = "btn btn-warning";
+             btn.textContent = "Add to Cart";
+            form.appendChild(btn);
+            document.getElementById('rez').appendChild(form);
+
+        });
+
+
+    }
+
+</script>
+<script>
+    function preventKeyboardInput(event) {
+        event.preventDefault();
+    }
+</script>
 </body>
 </html>

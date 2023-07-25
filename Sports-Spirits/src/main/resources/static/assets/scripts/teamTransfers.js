@@ -25,7 +25,7 @@ function showTeam(){
             })
         })
 }
-// showTeam();
+showTeam();
 
 function showTeamTransfers(){
 
@@ -78,4 +78,4 @@ function showTeamTransfers(){
         })
     })
 }
-// showTeamTransfers();
+showTeamTransfers();

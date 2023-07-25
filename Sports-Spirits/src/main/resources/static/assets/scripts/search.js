@@ -1,4 +1,4 @@
-const apiKey = '90857896f7msh0f73cc17220355bp1f423ajsnfcceb1f2c6d2';
+const apiKey = '6fbe9e29c5msh8b63eb96d8fc212p1fd9e6jsna0c68e516fe7';
 
 function getTeam(searchVal){
     const url = 'https://api-football-beta.p.rapidapi.com/teams?search='+searchVal;

@@ -32,7 +32,7 @@ function showCoachesInfo(){
         })
     })
 }
-// showCoachesInfo();
+showCoachesInfo();
 
 function showCoachCareer(){
     console.log(coachId);
@@ -68,7 +68,11 @@ function showCoachCareer(){
                 newCell3.appendChild(newText3);
 
                 var newCell4 = newRow.insertCell();
-                var newText4 = document.createTextNode(career.end);
+                if(career.end==null){
+                    var newText4 = document.createTextNode("");
+                }else {
+                    var newText4 = document.createTextNode(career.end);
+                }
                 newCell4.appendChild(newText4);
 
             })
@@ -77,7 +81,7 @@ function showCoachCareer(){
     })
 }
 
-// showCoachCareer();
+showCoachCareer();
 
 function showTrophies(){
 
@@ -116,4 +120,4 @@ function showTrophies(){
     })
 
 }
-// showTrophies();
+showTrophies();

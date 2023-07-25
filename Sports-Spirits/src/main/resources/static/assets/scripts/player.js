@@ -33,7 +33,7 @@ function showPlayerPersonalInfo(){
         })
     });
 }
-// showPlayerPersonalInfo();
+showPlayerPersonalInfo();
 
 function showPlayerTransfers(){
 
@@ -83,7 +83,7 @@ function showPlayerTransfers(){
         })
     })
 }
-// showPlayerTransfers();
+showPlayerTransfers();
 
 function showTrophies(){
 
@@ -122,7 +122,7 @@ function showTrophies(){
     })
 
 }
-// showTrophies();
+showTrophies();
 
 function showPlayerStatistics(season){
 
@@ -277,7 +277,7 @@ function showPlayerSeasons(){
         }
     showPlayerStatistics(seasons[0])
     }
-// showPlayerSeasons();
+showPlayerSeasons();
 
 
 

@@ -62,4 +62,4 @@ function showLiveScores(){
             });
         }).catch(error=>console.log(error));
 }
-// showLiveScores();
+showLiveScores();

@@ -10,7 +10,7 @@
 </head>
 <body>
 <header th:replace="fragments/header"></header>
-<div class="container" style="margin-top: 95px">
+<div class="container/" style="margin-top: 95px">
     <div class="row">
         <div class="col-md-9">
             <form enctype="multipart/form-data" action="/products"
@@ -49,6 +49,7 @@
                                    id="quantity" name="quantity"
                                    th:value="${product.quantity}"
                                    th:field="*{quantity}"
+                                   min="1"
                                    required
                                    placeholder="Enter the quantity">
                         </div>

@@ -19,7 +19,8 @@ function Schedules(){
         }).then(data=>{
             var schedulesBodyRef = document.getElementById('schedulesTable').getElementsByTagName('tbody')[0]
             data.response.forEach(item=>{
-                if(item.fixture.status.short != "FT"){
+                if(item.fixture.status.short != "FT" && item.fixture.status.short != "AET"
+                && item.fixture.status.short != "PEN"){
 
                     var newRow = schedulesBodyRef.insertRow();
 
@@ -47,7 +48,9 @@ function Schedules(){
                         newCell5.innerHTML = '<a href="' + "/Football/fixture/"
                             + item.fixture.id + '/details" style="text-decoration: none;color: black">'
                             + item.fixture.date.substring(11, 16) + "</a>";
-                    }else {
+                    }else if(item.fixture.status.short=="1H" || item.fixture.status.short=="2H"
+                        || item.fixture.status.short=="HT" || item.fixture.status.short=="ET"
+                        || item.fixture.status.short=="P"){
                         newCell5.innerHTML = '<a href="' + "/Football/fixture/"
                             + item.fixture.id + '/details" style="text-decoration: none;color: red">'
                             + item.goals.home + " - " + item.goals.away + "</a>";
@@ -59,8 +62,10 @@ function Schedules(){
 
                     if(item.fixture.status.short!="NS" && item.fixture.status.short!="TBD"){
                         var newCell7 = newRow.insertCell();
-                        newCell7.innerHTML = "<span style='color: green'>" + item.fixture.status.elapsed + "</span>"
-                    }else {
+                        newCell7.innerHTML = "<span style='color: green'>" + item.fixture.status.elapsed + '"' + "</span>"
+                    }if(item.fixture.status.short=="1H" || item.fixture.status.short=="2H"
+                        || item.fixture.status.short=="HT" || item.fixture.status.short=="ET"
+                        || item.fixture.status.short=="P"){
                         var newCell7 = newRow.insertCell();
                         var newText7 = document.createTextNode("");
                         newCell7.appendChild(newText7);
@@ -70,7 +75,7 @@ function Schedules(){
         })
     }
 }
-// Schedules();
+Schedules();
 
 function results(season){
 
@@ -231,7 +236,7 @@ function showTeamSeasons(){
         results(seasons[0]);
     }
 }
-// showTeamSeasons();
+showTeamSeasons();
 
 
 
