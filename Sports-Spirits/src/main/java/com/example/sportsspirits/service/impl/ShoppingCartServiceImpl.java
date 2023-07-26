@@ -1,5 +1,6 @@
 package com.example.sportsspirits.service.impl;
 
+import com.example.sportsspirits.models.CartItem;
 import com.example.sportsspirits.models.Product;
 import com.example.sportsspirits.models.ShoppingCart;
 import com.example.sportsspirits.models.User;
@@ -25,14 +26,17 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     private final PaymentService paymentService;
 
+    private final CartProductService cartProductService;
+
 
     public ShoppingCartServiceImpl(ProductService productService,
                                    ShoppingCartRepository shoppingCartRepository,
-                                   UserService userService, PaymentService paymentService) {
+                                   UserService userService, PaymentService paymentService, CartProductService cartProductService) {
         this.productService = productService;
         this.shoppingCartRepository = shoppingCartRepository;
         this.userService = userService;
         this.paymentService = paymentService;
+        this.cartProductService = cartProductService;
     }
 
     @Override
@@ -59,14 +63,32 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ShoppingCart shoppingCart = this.getActiveShoppingCart(userId);
         Product product = this.productService.findById(productId);
 
-        for (Product p : shoppingCart.getProducts()){
+        List<Product> cartItemProducts = this.cartProductService.findAll()
+                .stream().filter(c->c.getShoppingCartId()==shoppingCart)
+                .map(c->c.getProductId()).collect(Collectors.toList());
+
+        CartItem item = null;
+        boolean find = false;
+        for (Product p : cartItemProducts){
             if(p.getId().equals(product.getId())){
-                throw new ProductIsAlreadyInShoppingCart(p.getName());
+                find = true;
+
+                this.cartProductService.findAll().stream().filter(c->c.getProductId()==product)
+                        .forEach(c-> {
+                            c.setQuantity(c.getQuantity()+quantity);
+                        });
+
+                p.setQuantity(p.getQuantity()-quantity);
             }
         }
-        product.setQuantity(product.getQuantity()-quantity);
-
-        shoppingCart.getProducts().add(product);
+        if(find==false) {
+            item = new CartItem();
+            item.setProductId(product);
+            item.setShoppingCartId(shoppingCart);
+            item.setQuantity(quantity);
+            this.cartProductService.save(item);
+            product.setQuantity(product.getQuantity() - quantity);
+        }
         return this.shoppingCartRepository.save(shoppingCart);
     }
 
@@ -77,9 +99,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         Product p = this.productService.findById(productId);
 
-        shoppingCart.setProducts(shoppingCart.getProducts().stream()
-                .filter(product -> !product.getId().equals(productId))
-                .collect(Collectors.toList()));
+        this.cartProductService.findAll().stream().filter(c->c.getProductId()==p
+                && c.getShoppingCartId() ==shoppingCart).forEach(c->{
+            c.setQuantity(c.getQuantity()-quantity);
+        });
 
         p.setQuantity(p.getQuantity()+quantity);
 
@@ -106,10 +129,21 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         Product product = null;
 
-        if(shoppingCart.getProducts().size()>0){
-            for (Product sc : shoppingCart.getProducts()){
-                product = this.productService.findById(sc.getId());
-                product.setQuantity(product.getQuantity()+1);
+
+        List<CartItem> products = this.cartProductService.findAll()
+                .stream().filter(c->c.getShoppingCartId()==shoppingCart)
+                .collect(Collectors.toList());
+
+//        List<Product> items = this.cartProductService.findAll().stream()
+//                .filter(c->c.getShoppingCartId() ==shoppingCart).map(c->c.getProductId())
+//                .collect(Collectors.toList());
+
+        if(products.size()>0){
+            for (CartItem item : products){
+                product = this.productService.findById(item.getProductId().getId());
+                if(item.getProductId()==product){
+                    product.setQuantity(product.getQuantity()+item.getQuantity());
+                }
             }
         }
         shoppingCart.setStatus(CartStatus.Canceled);
@@ -124,13 +158,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 .findByUserUsernameAndStatus(username, CartStatus.Created)
                 .orElseThrow(() -> new ShoppingCartIsNotActiveException(username));
 
-        List<Product> products = shoppingCart.getProducts();
+
+        List<CartItem> products = this.cartProductService.findAll()
+                .stream().filter(c->c.getShoppingCartId()==shoppingCart)
+                .collect(Collectors.toList());
 
         float price = 0;
 
-        for (Product product : products) {
+        for (CartItem item : products) {
 
-            price += product.getCost();
+            price += item.getProductId().getCost()*item.getQuantity();
         }
         Charge charge = null;
         try {
@@ -139,7 +176,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             throw new TransactionalFailedException(username, e.getMessage());
         }
 
-        shoppingCart.setProducts(products);
         shoppingCart.setStatus(CartStatus.Finished);
         return this.shoppingCartRepository.save(shoppingCart);
     }

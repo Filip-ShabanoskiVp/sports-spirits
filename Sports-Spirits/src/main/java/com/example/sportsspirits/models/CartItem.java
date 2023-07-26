@@ -8,8 +8,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @Entity
-@Table(name = "cart_products")
-public class CartProduct {
+@Table(name = "cart_item")
+public class CartItem {
 
 
     @Id

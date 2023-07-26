@@ -1,9 +1,11 @@
 package com.example.sportsspirits.presentation;
 
+import com.example.sportsspirits.models.CartItem;
 import com.example.sportsspirits.models.Product;
 import com.example.sportsspirits.models.ShoppingCart;
 import com.example.sportsspirits.models.dto.ChargeRequest;
 import com.example.sportsspirits.service.AuthService;
+import com.example.sportsspirits.service.CartProductService;
 import com.example.sportsspirits.service.ProductService;
 import com.example.sportsspirits.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +13,9 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -27,13 +32,16 @@ public class ShoppingCartController {
 
     private final ProductService productService;
 
+    private final CartProductService cartProductService;
+
 
     public ShoppingCartController(ShoppingCartService shoppingCartService, AuthService authService,
-                                  ProductService productService) {
+                                  ProductService productService, CartProductService cartProductService) {
         this.shoppingCartService = shoppingCartService;
 
         this.authService = authService;
         this.productService = productService;
+        this.cartProductService = cartProductService;
     }
 
     @GetMapping
@@ -43,10 +51,20 @@ public class ShoppingCartController {
                     .findActiveShoppingCartByUsername(this.authService.getCurrentUserId());
 
 
-            model.addAttribute("shoppingCart",shoppingCart);
+            List<CartItem> products = this.cartProductService.findAll()
+                    .stream().filter(c->c.getShoppingCartId()==shoppingCart)
+                    .collect(Collectors.toList());
+
+
+            float suma=0;
+            for (CartItem p : products){
+                suma +=  (p.getProductId().getCost()* p.getQuantity())*100;
+            }
+            int sum = Math.round(suma);
+
+            model.addAttribute("shoppingCart",products);
             model.addAttribute("currency", "usd");
-            model.addAttribute("amount",(int) shoppingCart.getProducts().stream()
-                    .mapToDouble(Product::getCost).sum()*100);
+            model.addAttribute("amount",sum);
             model.addAttribute("publicKey",this.publicKey);
             return "shopping-cart";
         }catch (RuntimeException ex){

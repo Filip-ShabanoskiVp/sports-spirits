@@ -29,11 +29,11 @@ public class ShoppingCart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinTable(name = "cart_product",
-    joinColumns = @JoinColumn(name = "cart_id"),
-    inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product>products = new ArrayList<>();
+//    @ManyToMany
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JoinTable(name = "cart_product",
+//    joinColumns = @JoinColumn(name = "cart_id"),
+//    inverseJoinColumns = @JoinColumn(name = "product_id"))
+//    private List<Product>products = new ArrayList<>();
 
 }

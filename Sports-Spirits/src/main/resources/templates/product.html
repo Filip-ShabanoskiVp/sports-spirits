@@ -130,8 +130,8 @@
             input.classList = "form-control";
             input.placeholder = "Enter quantity";
             input.min = "1";
-            input.max = "1";
-            input.value = "1";
+            input.max = quantity;
+            input.value = quantity;
             input.onkeydown = function (){preventKeyboardInput(event);};
             div.appendChild(input)
             form.appendChild(div)

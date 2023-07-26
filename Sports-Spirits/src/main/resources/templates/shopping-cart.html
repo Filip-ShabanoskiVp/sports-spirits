@@ -51,14 +51,14 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="product: ${shoppingCart.getProducts()}">
-                                            <td><img th:src="${product.getProductImage()}"
+                                        <tr th:each="product: ${shoppingCart}">
+                                            <td><img th:src="${product.getProductId().getProductImage()}"
                                                      width="100px"height="100px"></td>
-                                            <td th:text="${product.getName()}"></td>
-                                            <td th:text="${product.getDescription()}"></td>
-                                            <td>1</td>
-                                            <td><span th:text="${product.getCost()}"></span> <span>$</span></td>
-                                            <td th:text="${product.getManufacturer().getName()}">{{product.manufacturer.name}}</td>
+                                            <td th:text="${product.getProductId().getName()}"></td>
+                                            <td th:text="${product.getProductId().getDescription()}"></td>
+                                            <td th:text="${product.getQuantity()}"></td>
+                                            <td><span th:text="${product.getProductId().getCost()}"></span> <span>$</span></td>
+                                            <td th:text="${product.getProductId().getManufacturer().getName()}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -87,7 +87,7 @@
                             </form>
                         </div>
                         <div class="col-3" style="position: relative;right: 5px"
-                             th:if="${shoppingCart.getProducts().size()>0}">
+                             th:if="${shoppingCart.size()>0}">
                             <div class="table-responsive" style=" height:150px;overflow:auto;
                         margin-top:20px;">
                                 <table class="table table-striped">
@@ -97,10 +97,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="product: ${shoppingCart.getProducts()}">
+                                    <tr th:each="product: ${shoppingCart}">
                                         <td>
                                             <button type="button"
-                                                    th:data-parameter1="${product.getId()}"
+                                                    th:data-parameter1="${product.getProductId().getId()}"
                                                     th:data-parameter2="${product.getQuantity()}"
                                                     th:id="${product.getId()}" class="btn btn-danger"
                                                     sec:authorize="hasRole('ROLE_USER')"
@@ -168,8 +168,8 @@
             input.classList = "form-control";
             input.placeholder = "Enter quantity";
             input.min = "1";
-            input.max = "1";
-            input.value = "1";
+            input.max = quantity;
+            input.value = quantity;
             input.onkeydown = function (){preventKeyboardInput(event);};
             div.appendChild(input)
             form.appendChild(div)

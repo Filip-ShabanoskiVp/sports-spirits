@@ -1,7 +1,7 @@
 package com.example.sportsspirits.service;
 
 
-import com.example.sportsspirits.models.CartProduct;
+import com.example.sportsspirits.models.CartItem;
 import com.example.sportsspirits.models.ShoppingCart;
 
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.Optional;
 
 public interface CartProductService {
 
-    CartProduct findAllByShoppingCartIdAndProductId(Long shoppingCartId, Long productId);
-    CartProduct save(CartProduct cartProduct);
+    CartItem findAllByShoppingCartIdAndProductId(Long shoppingCartId, Long productId);
+    CartItem save(CartItem cartProduct);
 
-    List<CartProduct> findAll();
+    List<CartItem> findAll();
 
-    CartProduct findById(Long cartId);
+    CartItem findById(Long cartId);
 
     void delete(Long cartId);
 }

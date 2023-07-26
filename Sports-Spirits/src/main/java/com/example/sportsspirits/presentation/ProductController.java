@@ -36,7 +36,6 @@ public class ProductController {
     @GetMapping
     public String ProductHomePage(Model model){
         List<Product> products = this.productService.findAll();
-
         model.addAttribute("products", products);
         return "product";
     }
