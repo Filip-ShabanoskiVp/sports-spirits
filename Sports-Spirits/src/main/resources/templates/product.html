@@ -16,75 +16,72 @@
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
           rel="stylesheet" type="text/css" />
 </head>
-<style>
-    #modal{
-        margin: 5px;
-    }
-</style>
 <body>
 <header th:replace="fragments/header"></header>
 <div class="content" style="margin-top: 100px;margin-left: 30px;width: 1285px;">
     <div class="row">
         <div class="col-12 card" style="height: 300px">
-            <div th:if="${param.message}">
-                <h2 class="text-center text-primary" th:text="${param.message}"></h2>
-            </div>
+            <div class="card-header bg-dark">
+                <h2 class="text-white">Sport Shop</h2>
+                <div th:if="${param.message}">
+                    <h2 class="text-center text-primary" th:text="${param.message}"></h2>
+                </div>
 
-            <div th:if="${param.error}">
-                <h2 class="text-center text-danger" th:text="${param.error}"></h2>
+                <div th:if="${param.error}">
+                    <h2 class="text-center text-danger" th:text="${param.error}"></h2>
+                </div>
             </div>
-            <h2>Sport Shop</h2>
-            <br>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Quantity</th>
-                        <th>Cost</th>
-                        <th>Manufacturer</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="product: ${products}" th:if="${product.getQuantity()>0}">
-                        <td><img th:src="${product.getProductImage()}"
-                                 width="100px" height="100px"></td>
-                        <td th:text="${product.getName()}"></td>
-                        <td th:text="${product.getDescription()}"></td>
-                        <td th:text="${product.getQuantity()}"></td>
-                        <td><span th:text="${product.getCost()}"></span><span> $</span></td>
-                        <td th:text="${product.getManufacturer().getName()}">{{product.manufacturer.name}}</td>
-                        <td>
-                            <button type="button"
-                                    th:data-parameter1="${product.getId()}"
-                                    th:data-parameter2="${product.getQuantity()}"
-                                    th:id="${product.getId()}" class="btn btn-primary"
-                                    sec:authorize="hasRole('ROLE_USER')"
-                                    onclick="show(this.getAttribute('data-parameter1')
+            <div class="card-body">
+                <div class="table-responsive" style=" height:150px;overflow:auto;
+                        margin-top:20px;">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Cost</th>
+                            <th>Manufacturer</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="product: ${products}" th:if="${product.getQuantity()>0}">
+                            <td><img th:src="${product.getProductImage()}"
+                                     width="100px" height="100px"></td>
+                            <td th:text="${product.getName()}"></td>
+                            <td th:text="${product.getDescription()}"></td>
+                            <td th:text="${product.getQuantity()}"></td>
+                            <td><span th:text="${product.getCost()}"></span><span> $</span></td>
+                            <td th:text="${product.getManufacturer().getName()}">{{product.manufacturer.name}}</td>
+                            <td>
+                                <button type="button"
+                                        th:data-parameter1="${product.getId()}"
+                                        th:data-parameter2="${product.getQuantity()}"
+                                        th:id="${product.getId()}" class="btn btn-primary"
+                                        sec:authorize="hasRole('ROLE_USER')"
+                                        onclick="show(this.getAttribute('data-parameter1')
                                     ,this.getAttribute('data-parameter2'))"
-                            >Add to Cart</button>
-                        </td>
-                        <td>
-                            <a th:href="@{/products/{id}/edit(id=${product.getId()})}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-secondary">Edit</a>
-                        </td>
-                        <td>
-                            <form th:action="@{/products/{id}/delete(id=${product.getId()})}" th:method="post" sec:authorize="hasRole('ROLE_ADMIN')">
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                                >Add to Cart</button>
+                            </td>
+                            <td>
+                                <a th:href="@{/products/{id}/edit(id=${product.getId()})}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success">Edit</a>
+                            </td>
+                            <td>
+                                <form th:action="@{/products/{id}/delete(id=${product.getId()})}" th:method="post" sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="col mb-2">
-            <div class="row">
-                <a class="btn btn-secondary btn-block" href="/products/add-new"
+            <div class="card-footer">
+                <a class="btn btn-primary btn-block" href="/products/add-new"
                    sec:authorize="hasRole('ROLE_ADMIN')">Add new Product</a>
             </div>
         </div>

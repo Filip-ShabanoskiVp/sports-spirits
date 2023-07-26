@@ -140,6 +140,9 @@
               <a th:href="@{/aboutUs/rateUs}"
                  class="btn btn-primary">Rate Us</a>
             </div>
+            <div sec:authorize="hasRole('ROLE_USER')" th:if="${check==true}">
+              <p class="text-success">You had already rated</p>
+            </div>
           </div>
           <div class="col-6" >
             <p>I made this application to help peoples in very easy way to get theirs chosen sport information.

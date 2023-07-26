@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
   .showBtn{
     display: block;
@@ -28,16 +29,19 @@
             <a class="nav-link" href="/admin">Administrator</a>
           </li>
           <li class="nav-item" sec:authorize="!isAuthenticated()">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/login">Sign in</a>
           </li>
           <li class="nav-item" sec:authorize="isAuthenticated()">
-            <a class="nav-link" href="/logout">Log Out</a>
+            <a class="nav-link" href="/logout">Sign out</a>
           </li>
           <li class="nav-item" sec:authorize="isAuthenticated()">
             <a class="nav-link" sec:authentication="name"></a>
           </li>
           <li class="nav-item" sec:authorize="!isAuthenticated()">
             <a class="nav-link" href="/logup">SignUp</a>
+          </li>
+          <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+            <a href="/shopping-carts" class="btn btn-warning"><i class="fa fa-shopping-cart"></i></a>
           </li>
           <li class="nav-item">
             <div class="from-group">
@@ -48,7 +52,9 @@
             </ul>
           </li>
           <li class="nav-item">
-            <input type="submit" class="btn btn-success" value="Search" onclick="search()">
+            <button type="submit" class="btn btn-success" onclick="search()">
+              <i class="fa fa-search"></i>
+            </button>
           </li>
           <li>
             <input id="close" type="submit"

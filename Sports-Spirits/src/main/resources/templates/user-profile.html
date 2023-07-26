@@ -12,8 +12,8 @@
 <header th:replace="fragments/header"></header>
 <div class="container">
   <div class="card" style="margin-top: 150px">
-    <div class="card-header">
-      <h2>User profile</h2>
+    <div class="card-header bg-dark">
+      <h2 class="text-white">User profile</h2>
     </div>
     <div class="card-body">
       <table class="table table-striped">
@@ -23,7 +23,6 @@
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
-          <th>Embg</th>
         </tr>
         </thead>
         <tbody>
@@ -32,13 +31,9 @@
           <td th:text="${user.getFirstName()}"></td>
           <td th:text="${user.getLastName()}"></td>
           <td th:text="${user.getEmail()}"></td>
-          <td th:text="${user.getEmbg()}"></td>
         </tr>
         </tbody>
       </table>
-      <a href="/shopping-carts" class="btn btn-secondary"
-         sec:authorize="hasRole('ROLE_USER')">Shopping-cart</a>
-
     </div>
   </div>
 </div>

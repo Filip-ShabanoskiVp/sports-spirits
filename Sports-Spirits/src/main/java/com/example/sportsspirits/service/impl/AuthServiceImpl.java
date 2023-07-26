@@ -45,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public User signUpUser(String username, String password, String repeatedPassword,
-                           String first_name, String last_name, String email, String embg) {
+                           String first_name, String last_name, String email) {
 
         if(!password.equals(repeatedPassword)){
             throw new PasswordDoesntMatchException();
@@ -67,10 +67,6 @@ public class AuthServiceImpl implements AuthService {
             throw new LastNameWrongFormat();
         }
         user.setLastName(last_name);
-        if(!embg.matches("[0-9]{13}")){
-            throw new EmbgWrongFormat();
-        }
-        user.setEmbg(embg);
 
         if(this.roleRepository.findByName("ROLE_USER")==null){
             Role role = new Role();
@@ -92,7 +88,6 @@ public class AuthServiceImpl implements AuthService {
             admin.setFirstName("Admin");
             admin.setLastName("Admin");
             admin.setEmail("admin@gmial.com");
-            admin.setEmbg("0608997440010");
             Role role = new Role();
             role.setName("ROLE_ADMIN");
             this.roleRepository.save(role);

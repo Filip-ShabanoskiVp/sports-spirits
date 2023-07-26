@@ -27,9 +27,6 @@ public class User implements UserDetails {
     private String LastName;
 
     @NotNull
-    private String embg;
-
-    @NotNull
     private String password;
 
     private boolean isAccountNonExpired;

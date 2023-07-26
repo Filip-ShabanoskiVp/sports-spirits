@@ -28,9 +28,9 @@ public class SignUpController {
     public String SignUp(@RequestParam String username, @RequestParam String password,
                          @RequestParam String repeatedPassword,
                          @RequestParam String first_name, @RequestParam String last_name,
-                         @RequestParam String email, @RequestParam String embg) {
+                         @RequestParam String email) {
         try {
-            this.authService.signUpUser(username, password, repeatedPassword, first_name, last_name, email, embg);
+            this.authService.signUpUser(username, password, repeatedPassword, first_name, last_name, email);
             return "redirect:/login?info=SuccessfulRegistration!";
         } catch (RuntimeException ex) {
             return "redirect:/logup?error=" + ex.getLocalizedMessage();
