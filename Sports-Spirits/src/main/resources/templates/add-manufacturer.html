@@ -16,8 +16,8 @@
             <form enctype="multipart/form-data" action="/add-manufacturer"
                   method="post" th:object="${manufacturer}">
                 <div class="card" style="position: relative;bottom: 30px;">
-                    <div class="card-header" style="background-color: grey">
-                        <h2 class="text-white">add Manufacturer Page</h2>
+                    <div class="card-header bg-dark" style="background-color: grey">
+                        <h2 class="text-white">Add Manufacturer Page</h2>
                     </div>
                     <div class="card-body">
                         <br>
@@ -37,7 +37,7 @@
                                    placeholder="Enter the Location">
                         </div>
                     </div>
-                    <div style="background-color: grey;" class="card-footer">
+                    <div class="card-footer bg-danger">
                         <button type="submit" class="btn btn-primary">Save</button>
                         <a href="/products/add-new" class="btn btn-success"
                            style="margin-left: 10px;">Back</a>
