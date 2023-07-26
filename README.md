@@ -1,1 +1,1 @@
-# sports-spirits
+# Sports spirits
