@@ -80,7 +80,7 @@ Schedules();
 function results(season){
 
     if(matchPlay=="results"){
-        const url = 'https://api-football-beta.p.rapidapi.com/fixtures?team='+teamId+'&status=FT&season='+season;
+        const url = 'https://api-football-beta.p.rapidapi.com/fixtures?team='+teamId+'&season='+season;
         const options = {
             method: 'GET',
             headers: {
@@ -95,7 +95,8 @@ function results(season){
         }).then(data=>{
             var resultsBodyRef = document.getElementById('resultsTable').getElementsByTagName('tbody')[0]
             data.response.forEach(item=>{
-                if(item.fixture.status.short == "FT"){
+                if(item.fixture.status.short == "FT" || item.fixture.status.short == "AET"
+                || item.fixture.status.short == "PEN"){
 
                     var newRow = resultsBodyRef.insertRow();
 
@@ -105,7 +106,7 @@ function results(season){
 
                     var newCell2 = newRow.insertCell();
                     var newText2 = document.createTextNode(item.fixture.date.substring(0,10));
-                    newCell2.appendChild(newText2);
+                        newCell2.appendChild(newText2);
 
 
                     var newCell3 = newRow.insertCell();

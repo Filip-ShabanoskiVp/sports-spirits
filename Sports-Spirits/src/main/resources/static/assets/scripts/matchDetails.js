@@ -211,8 +211,12 @@ function matchDetailsAndMatchOfficials(){
                 document.getElementById('fixAwayTeam').innerText = item.teams.away.name;
 
                 if(item.fixture.status.short!="NS") {
-                    document.getElementById('halfTimeResult').innerText = "(HT " + item.score.halftime.home
-                        + " - " + item.score.halftime.away + ")";
+                    if(item.score.halftime.home!=null && item.score.halftime.away!=null) {
+                        document.getElementById('halfTimeResult').innerText = "(HT " + item.score.halftime.home
+                            + " - " + item.score.halftime.away + ")";
+                    }else {
+                        document.getElementById('halfTimeResult').innerText = "";
+                    }
 
                     if((item.score.extratime.home!=null && item.score.extratime.away!=null)
                         && (item.score.penalty.home!=null && item.score.penalty.away!=null)) {
