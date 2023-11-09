@@ -4,7 +4,4 @@
 
 1.Home Page
 
-![00](https://github.com/Filip-ShabanoskiVp/sports-spirits/assets/52547885/e80b72d6-70e9-4214-b9e6-8ec670a7e5f5)
-
-
-
+![homePage](https://github.com/Filip-ShabanoskiVp/sports-spirits/assets/52547885/a2f6e7af-3e26-4a0b-a09f-479c7b6785fd)
