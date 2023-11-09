@@ -489,8 +489,8 @@ function LeagueTopScorers(league,season) {
                         }
 
                         var newCell5 = newRow.insertCell();
-                        if (stat.goals.total != null) {
-                            newCell5.innerHTML = stat.goals.total;
+                        if (stat.goals.assists != null) {
+                            newCell5.innerHTML = stat.goals.assists;
                         } else {
                             newCell5.innerHTML = "0";
                         }

@@ -61,7 +61,11 @@ function fixtureLineup() {
                 a.style.textDecoration = "none";
                 a.style.color = "black";
                 a.href = "/Football/player/" + start.player.id;
-                var newText2 = document.createTextNode(start.player.name + " ("+ start.player.pos +")");
+                if(start.player.pos!=null) {
+                    var newText2 = document.createTextNode(start.player.name + " (" + start.player.pos + ")");
+                }else {
+                    var newText2 = document.createTextNode(start.player.name);
+                }
                 a.appendChild(newText2)
                 newCell2.appendChild(a);
 
@@ -117,7 +121,11 @@ function fixtureLineup() {
                 a.style.textDecoration = "none";
                 a.style.color = "black";
                 a.href = "/Football/player/" + start.player.id;
-                var newText2 = document.createTextNode(start.player.name + " ("+ start.player.pos +")");
+                if(start.player.pos!=null) {
+                    var newText2 = document.createTextNode(start.player.name + " (" + start.player.pos + ")");
+                }else {
+                    var newText2 = document.createTextNode(start.player.name);
+                }
                 a.appendChild(newText2)
                 newCell2.appendChild(a);
             })
@@ -236,9 +244,18 @@ function matchDetailsAndMatchOfficials(){
                     }
                 }
 
-                document.getElementById('fixDate').innerText = item.fixture.date.substring(0,10);
+                if(item.fixture.date!=null) {
+                    document.getElementById('fixDate').innerText = item.fixture.date.substring(0, 10);
+                }else {
+                    document.getElementById('fixDate').innerText = "";
+                }
 
-                document.getElementById('fixLeague').innerText = item.league.name + " ("+item.league.country+")";
+                if(item.league.name!=null) {
+                    document.getElementById('fixLeague').innerText = item.league.name + " (" + item.league.country + ")";
+                }else {
+                    document.getElementById('fixLeague').innerText = ""
+                    ;
+                }
 
                 document.getElementById('fixRound').innerText = item.league.round;
                 if(item.fixture.status.short=="1H" || item.fixture.status.short=="2H"
@@ -249,8 +266,12 @@ function matchDetailsAndMatchOfficials(){
                 }else {
                     document.getElementById('fixStartTime').innerText = "KO "+ item.fixture.date.substring(11, 16);
                 }
-                document.getElementById('fixVenue').innerText = "Venue "+item.fixture.venue.name
-                    + " (" + item.fixture.venue.city + ")";
+                if(item.fixture.venue.name!=null && item.fixture.venue.city) {
+                    document.getElementById('fixVenue').innerText = "Venue " + item.fixture.venue.name
+                        + " (" + item.fixture.venue.city + ")";
+                }else {
+                    document.getElementById('fixVenue').innerText = "";
+                }
 
 
                 if(item.fixture.referee!=null) {
@@ -712,7 +733,6 @@ function getH2H(idHome, idAway){
     fetch(url, options).then(res=>{
         return res.json();
     }).then(data=>{
-
         if(data.response.length>0) {
 
 
@@ -790,7 +810,7 @@ function playersFixtureStats(){
     fetch(url, options).then(res=>{
         return res.json();
     }).then(data=>{
-
+        console.log(data);
         if(data.response.length>0){
 
 

@@ -25,7 +25,8 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public Charge charge(ChargeRequest chargeRequest)
-            throws APIConnectionException, APIException, AuthenticationException, InvalidRequestException, CardException {
+            throws APIConnectionException, APIException, AuthenticationException,
+            InvalidRequestException, CardException {
         Map<String, Object> chargeParams = new HashMap<>();
         chargeParams.put("amount", chargeRequest.getAmount());
         chargeParams.put("currency", chargeRequest.getCurrency());

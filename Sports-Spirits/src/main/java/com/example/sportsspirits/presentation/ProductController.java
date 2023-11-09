@@ -51,13 +51,8 @@ public class ProductController {
 
     @Secured("ROLE_ADMIN")
     @PostMapping
-    public String saveProduct(
-            @RequestParam(required = false) Long id,
-            @Valid Product product,
-            BindingResult bindingResult,
-            @RequestParam MultipartFile image,
-            Model model) {
-
+    public String saveProduct(@RequestParam(required = false) Long id, @Valid Product product, BindingResult bindingResult,
+            @RequestParam MultipartFile image, Model model) {
         if (bindingResult.hasErrors()) {
             List<Manufacturer> manufacturers = this.manufacturerService.findAll();
             model.addAttribute("manufacturers", manufacturers);

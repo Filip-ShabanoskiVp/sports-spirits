@@ -59,14 +59,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     @Transactional
     public ShoppingCart addProductToShoppingCart(String userId, Long productId,int quantity) {
-
         ShoppingCart shoppingCart = this.getActiveShoppingCart(userId);
         Product product = this.productService.findById(productId);
-
         List<Product> cartItemProducts = this.cartProductService.findAll()
                 .stream().filter(c->c.getShoppingCartId()==shoppingCart)
                 .map(c->c.getProductId()).collect(Collectors.toList());
-
         CartItem item = null;
         boolean find = false;
         for (Product p : cartItemProducts){
@@ -103,9 +100,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 && c.getShoppingCartId() ==shoppingCart).forEach(c->{
             c.setQuantity(c.getQuantity()-quantity);
         });
-
         p.setQuantity(p.getQuantity()+quantity);
-
         return this.shoppingCartRepository.save(shoppingCart);
     }
 
@@ -122,22 +117,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart cancelActiveShoppingCart(String userId) {
-
         ShoppingCart shoppingCart = this.shoppingCartRepository
                 .findByUserUsernameAndStatus(userId,CartStatus.Created)
                 .orElseThrow(()->new ShoppingCartIsNotActiveException(userId));
-
         Product product = null;
-
-
         List<CartItem> products = this.cartProductService.findAll()
                 .stream().filter(c->c.getShoppingCartId()==shoppingCart)
                 .collect(Collectors.toList());
-
-//        List<Product> items = this.cartProductService.findAll().stream()
-//                .filter(c->c.getShoppingCartId() ==shoppingCart).map(c->c.getProductId())
-//                .collect(Collectors.toList());
-
         if(products.size()>0){
             for (CartItem item : products){
                 product = this.productService.findById(item.getProductId().getId());
@@ -147,7 +133,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             }
         }
         shoppingCart.setStatus(CartStatus.Canceled);
-
         return this.shoppingCartRepository.save(shoppingCart);
     }
 
@@ -172,7 +157,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         Charge charge = null;
         try {
             charge = this.paymentService.charge(chargeRequest);
-        } catch (CardException | APIException | AuthenticationException | APIConnectionException | InvalidRequestException e) {
+        } catch (CardException | APIException | AuthenticationException | APIConnectionException
+                 | InvalidRequestException e) {
             throw new TransactionalFailedException(username, e.getMessage());
         }
 

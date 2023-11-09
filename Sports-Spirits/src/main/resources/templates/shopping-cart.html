@@ -51,7 +51,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="product: ${shoppingCart}">
+                                        <tr th:each="product: ${shoppingCart}" th:if="${product.getQuantity()>0}" >
                                             <td><img th:src="${product.getProductId().getProductImage()}"
                                                      width="100px"height="100px"></td>
                                             <td th:text="${product.getProductId().getName()}"></td>
@@ -97,7 +97,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="product: ${shoppingCart}">
+                                    <tr th:each="product: ${shoppingCart}" th:if="${product.getQuantity()>0}">
                                         <td>
                                             <button type="button"
                                                     th:data-parameter1="${product.getProductId().getId()}"
@@ -176,7 +176,7 @@
             var btn = document.createElement('button');
             btn.type = "submit";
             btn.classList = "btn btn-danger";
-            btn.textContent = "Remove to Cart";
+            btn.textContent = "Remove from Cart";
             form.appendChild(btn);
             document.getElementById('rez').appendChild(form);
 

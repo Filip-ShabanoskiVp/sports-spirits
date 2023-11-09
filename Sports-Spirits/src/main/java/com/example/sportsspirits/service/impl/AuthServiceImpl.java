@@ -46,7 +46,6 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public User signUpUser(String username, String password, String repeatedPassword,
                            String first_name, String last_name, String email) {
-
         if(!password.equals(repeatedPassword)){
             throw new PasswordDoesntMatchException();
         }
@@ -67,7 +66,6 @@ public class AuthServiceImpl implements AuthService {
             throw new LastNameWrongFormat();
         }
         user.setLastName(last_name);
-
         if(this.roleRepository.findByName("ROLE_USER")==null){
             Role role = new Role();
             role.setName("ROLE_USER");

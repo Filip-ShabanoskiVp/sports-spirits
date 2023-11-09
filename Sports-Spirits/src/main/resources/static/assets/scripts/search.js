@@ -1,4 +1,4 @@
-const apiKey = '6f2f0430f2msh82ec4424641b7afp175579jsn096efcabd13d';
+const apiKey = '6fbe9e29c5msh8b63eb96d8fc212p1fd9e6jsna0c68e516fe7';
 
 function getTeam(searchVal){
     const url = 'https://api-football-beta.p.rapidapi.com/teams?search='+searchVal;
@@ -26,8 +26,17 @@ function getTeam(searchVal){
 
 
                 var li = document.createElement("li");
-                var newTextNode = document.createTextNode(item.team.name + "(" + item.team.country + ")");
+                if(item.team.country!=null){
+                    var newTextNode = document.createTextNode(item.team.name + "(" + item.team.country + ")");
+                }else {
+                    var newTextNode = document.createTextNode(item.team.name);
+                }
                 var anchor = document.createElement('a');
+                var img = document.createElement('img');
+                img.src = item.team.logo;
+                img.width = 30;
+                img.width = 30;
+                anchor.appendChild(img);
                 anchor.appendChild(newTextNode);
                 anchor.href =  "/Football/team/" + item.team.id;
                 anchor.style.textDecoration = "none";
@@ -83,8 +92,17 @@ function getLeague(searchVal){
 
 
                 var li = document.createElement("li");
-                var newTextNode = document.createTextNode(item.league.name + " (" + item.country.code + ")");
+                if(item.country.code!=null) {
+                    var newTextNode = document.createTextNode(item.league.name + " (" + item.country.code + ")");
+                }else {
+                    var newTextNode = document.createTextNode(item.league.name);
+                }
                 var anchor = document.createElement('a');
+                var img = document.createElement('img');
+                img.src = item.league.logo;
+                img.width = 30;
+                img.width = 30;
+                anchor.appendChild(img);
                 anchor.appendChild(newTextNode);
                 anchor.href = "/Football/league/" + item.league.id + "/" + item.league.type;
                 anchor.style.textDecoration = "none";
@@ -135,12 +153,17 @@ function getCoach(searchVal){
 
                 var li = document.createElement("li");
                 var newTextNode;
+                var img = document.createElement("img");
+                img.src = item.photo;
+                img.width = 30;
+                img.width = 30;
                 if (item.nationality!=null) {
                     newTextNode = document.createTextNode(item.name + " (" + item.nationality + ")");
                 }else {
                     newTextNode = document.createTextNode(item.name);
                 }
                 var anchor = document.createElement('a');
+                anchor.appendChild(img);
                 anchor.appendChild(newTextNode);
                 anchor.href = "/Football/coach/" + item.id;
                 anchor.style.textDecoration = "none";

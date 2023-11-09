@@ -26,8 +26,6 @@ public class Product {
 
     private String description;
 
-//    @Lob
-//    @Column(name = "image",length = 100000)
     @Column(name = "image",columnDefinition = "LONGTEXT")
     private String productImage;
 
